@@ -1,0 +1,8 @@
+# Homework resources
+*.docx
+*.pdf
+*.png
+
+# Binary files
+*.app
+*.exe
