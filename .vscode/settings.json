@@ -1,0 +1,10 @@
+{
+    "clangd.fallbackFlags": [
+        "-flto=thin",
+        "-finline-functions",
+        "-fuse-ld=lld",
+        "-I../include",
+        "-stdlib=libc++",
+        "-Wall"
+    ]
+}
