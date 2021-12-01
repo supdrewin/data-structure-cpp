@@ -5,5 +5,8 @@
         "-fuse-ld=lld",
         "-I../include",
         "-Wall"
-    ]
+    ],
+    "files.associations": {
+        "*.make": "makefile"
+    }
 }
