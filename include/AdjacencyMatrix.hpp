@@ -13,12 +13,10 @@
  * with this program.If not, see <https://www.gnu.org/licenses/>.
  */
 
-#pragma once
-
-#ifndef __adjacency_matrix_hpp
+#if !defined(__adjacency_matrix_hpp)
 #define __adjacency_matrix_hpp
 
-#include "../try-7/CompressedMatrix.hpp"
+#include "CompressedMatrix.hpp"
 
 template <int max_vertex_number>
 class adjacency_matrix
@@ -77,4 +75,4 @@ public:
   }
 };
 
-#endif // !__adjacency_matrix_hpp
+#endif // !defined(__adjacency_matrix_hpp)

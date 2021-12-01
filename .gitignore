@@ -3,6 +3,9 @@
 *.pdf
 *.png
 
+# Build directory
+build/
+
 # Binary files
 *.app
 *.exe

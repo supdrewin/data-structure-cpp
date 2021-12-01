@@ -3,7 +3,7 @@ SHELL     = zsh
 PLATFORM    = posix
 EXEC        = app
 CXX         = clang++
-CXXFLAGS    = -I../include -std=c++2a -O2 -pipe
+CXXFLAGS    = -I$(PREFIX)/include -std=c++2a -O2 -pipe
 LDFLAGS     = -fuse-ld=lld -flto=thin
 
 ifeq ($(CROSS), 1)
@@ -16,14 +16,14 @@ ifeq ($(CROSS), 1)
 endif
 
 CXXFLAGS   += -finline-functions -Wall -g
-LDFLAGS    += -L../lib/$(PLATFORM) -static -lutility
+LDFLAGS    += -L$(PREFIX)/lib/$(PLATFORM) -static -lutility
 
 INPUT       = || :
-OUTPUT      = ./$(PROJECT).$(EXEC)
+OUTPUT      = $(PREFIX)/build/$(PROJECT).$(EXEC)
 
 *.cpp: clean
 
-all: *.cpp
+all: *.cpp; mkdir -p $(PREFIX)/build
 	@echo '\e[33;1mMaking $^ using $(CXX)...\e[0;36m'
 	$(CXX) $(CXXFLAGS) -o $(OUTPUT) $^ $(LDFLAGS)
 

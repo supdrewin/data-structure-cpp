@@ -3,7 +3,8 @@
         "-flto=thin",
         "-finline-functions",
         "-fuse-ld=lld",
-        "-I../include",
+        "-I../../include",
+        "-I../../../include",
         "-Wall"
     ],
     "files.associations": {

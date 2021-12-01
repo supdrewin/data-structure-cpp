@@ -13,9 +13,10 @@
  * along with this program.If not, see <https://www.gnu.org/licenses/>.
  */
 
-// #pragma once
+#if !defined(__compressed_matrix_hpp)
+#define __compressed_matrix_hpp
 
-#include "../try-2/SequenceList.hpp"
+#include "SequenceList.hpp"
 
 template <typename data_type> //
 struct elem_type {
@@ -190,3 +191,5 @@ public:
     return tmp;
   }
 };
+
+#endif // !defined(__compressed_matrix_hpp)
