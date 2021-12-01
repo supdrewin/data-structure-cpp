@@ -21,18 +21,16 @@ LDFLAGS    += -L$(PREFIX)/lib/$(PLATFORM) -static -lutility
 INPUT       = || :
 OUTPUT      = $(PREFIX)/build/$(PROJECT).$(EXEC)
 
-*.cpp: clean
-
 all: *.cpp; mkdir -p $(PREFIX)/build
-	@echo '\e[33;1mMaking $^ using $(CXX)...\e[0;36m'
+	@echo "\e[33;1m`date` - Making $^ using $(CXX)...\e[0;36m"
 	$(CXX) $(CXXFLAGS) -o $(OUTPUT) $^ $(LDFLAGS)
 
 .PHONY: test clean
 
 test: all
-	@echo '\e[33;1mNow testing...\e[0;36m'
+	@echo "\e[33;1m`date` - Now testing for $(PLATFORM)...\e[0;36m"
 	-[[ $(EXEC) = exe ]] || $(OUTPUT) $(INPUT)
 
-clean: ; clear
-	@echo '\e[33;1mClean up for $(PLATFORM)...\e[0;36m'
+clean:
+	@echo "\e[33;1m`date` - Clean up for $(PLATFORM)...\e[0;36m"
 	-rm -f $(OUTPUT)
