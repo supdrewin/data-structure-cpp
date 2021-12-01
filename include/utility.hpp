@@ -21,11 +21,11 @@
 #undef _program_name
 #define _program_name argv[0]
 
-#undef max
-#define max(a, b) (((a) < (b)) ? (b) : (a))
+#undef __max
+#define __max(a, b) (((a) < (b)) ? (b) : (a))
 
-#undef min
-#define min(a, b) (((a) < (b)) ? (a) : (b))
+#undef __min
+#define __min(a, b) (((a) < (b)) ? (a) : (b))
 
 #undef __sizeof
 #define __sizeof(arr) sizeof(arr) / sizeof(*(arr))
@@ -84,8 +84,8 @@ void _assert_fail(std::string assertion, std::string file, unsigned int line,
 #define _ASSERT_FAIL(expr)                                                     \
   _assert_fail(#expr, __FILE__, __LINE__, __PRETTY_FUNCTION__, _program_name)
 
-#undef assert
-#define assert(expr) (static_cast<bool>(expr) ? void(0) : _ASSERT_FAIL(expr))
+#undef __assert
+#define __assert(expr) (static_cast<bool>(expr) ? void(0) : _ASSERT_FAIL(expr))
 
 #endif // defined(__cplusplus)
 

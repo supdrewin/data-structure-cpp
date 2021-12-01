@@ -13,13 +13,10 @@
  * along with this program.If not, see <https://www.gnu.org/licenses/>.
  */
 
-#pragma once
-
-#ifndef __huffman_tree_hpp
+#if !defined(__huffman_tree_hpp)
 #define __huffman_tree_hpp
 
 #include <iomanip>
-#include <iostream>
 
 #include "utility.hpp"
 
@@ -68,7 +65,7 @@ public:
       : code_index(new int[node_count]()) {
     // get the max weight
     for (int i = 0; i < node_count; ++i)
-      this->node->max_weight = max(this->node->max_weight, weight[i]);
+      this->node->max_weight = __max(this->node->max_weight, weight[i]);
 
     for (int i = 0; i < node_count; ++i) {
       // init and make sure enough size
@@ -203,4 +200,4 @@ public:
   }
 };
 
-#endif // !__huffman_tree_hpp
+#endif // !defined(__huffman_tree_hpp)

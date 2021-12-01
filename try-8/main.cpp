@@ -34,7 +34,9 @@ int factor(int n, int *sum) {
 int main() {
   int *data, n = 0;
 
-  assert(argc != 2 ? n : n = atoi(argv[1]));
+  __assert(argc == 2 //
+               ? n = std::atoi(argv[1])
+               : n);
   data = new int[n];
 
   for (int i = 0; i < n; ++i)

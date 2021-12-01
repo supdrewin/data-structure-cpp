@@ -13,48 +13,48 @@
  * along with this program.If not, see <https://www.gnu.org/licenses/>.
  */
 
-#pragma once
-#include <iostream>
+#if !defined(__sequence_queue_hpp)
+#define __sequence_queue_hpp
 
-template <typename ElemType, int MaxSize> //
-class SequenceQueue {
+#include "utility.hpp"
+
+template <typename elem_type, int max_size> //
+class sequence_queue {
 protected:
   // Var `count' should le `MaxSize'.
-  ElemType queue[MaxSize];
+  elem_type queue[max_size];
   int count = 0, front = 0;
 
 public:
   // This constructor use x to init queue.
-  SequenceQueue(ElemType x) { this->Append(x); }
-  ~SequenceQueue() {}
+  sequence_queue(elem_type x) { this->append(x); }
+  ~sequence_queue() {}
 
-  int empty() {
-    if (!this->count)
-      return true;
-    return false;
-  }
+  int empty() { return this->count ? false : true; }
 
-  int Append(ElemType x) {
-    if (this->count > MaxSize)
+  bool append(elem_type x) {
+    if (this->count > max_size)
       return false;
 
     /* ((count + front)) can gt 100.          */
-    this->queue[                              //
-        (this->count + this->front) % MaxSize //
+    this->queue[                               //
+        (this->count + this->front) % max_size //
     ] = x;
 
     this->count++;
     return true;
   }
 
-  ElemType Delete() {
+  elem_type del() {
     if (this->empty())
-      return (ElemType) false;
+      return elem_type(false);
 
-    ElemType x = this->queue[this->front];
-    ++this->front %= MaxSize;
+    elem_type x = this->queue[this->front];
+    ++this->front %= max_size;
 
     this->count--;
     return x;
   }
 };
+
+#endif // !__sequence_queue_hpp

@@ -1,11 +1,11 @@
 /**
  * Copyright(C) 2021 Supdrewin <WITHOUT ANY WARRANTY>
- * SequenceList.hpp is part of SequenceList Example.
- * The SequenceList Example is free software: you can redistribute it
+ * SequenceList.hpp is part of Sequence List Example.
+ * The Sequence List Example is free software: you can redistribute it
  * and/or modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation, either version 3 of
  * the License, or (at your option) any later version.
- * The SequenceList Example is distributed in the hope that it will be
+ * The Sequence List Example is distributed in the hope that it will be
  * useful, but WITHOUT ANY WARRANTY; without even the implied warranty
  * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
@@ -16,22 +16,22 @@
 #ifndef __sequence_list_hpp
 #define __sequence_list_hpp
 
-#include <iostream>
+#include "utility.hpp"
 
 template <typename elem_type, int max_size> //
-class SequenceList {
+class sequence_list {
 protected:
   elem_type list[max_size]; // store list member to here
   int size = 0;             // the size of sequence list,
                             // default to 0(empty)
 
 public:
-  SequenceList() { this->init(); }
-  ~SequenceList() {}
+  sequence_list() { this->init(); }
+  virtual ~sequence_list() {}
 
   virtual void init() {}
-  virtual int get(int) {}
-  virtual int find(std::string) {}
+  virtual int get(int) { return false; }
+  virtual int find(std::string) { return false; }
 
   int length() { return this->size; }
 

@@ -1,11 +1,11 @@
 /**
- * Copyright(C) 2021 Supdrewin <WITHOUT ANY WARRANTY>
- * SequenceList.cpp is part of SequenceList Example.
- * The SequenceList Example is free software: you can redistribute it
+ * Copyright(C) 2021 Supdrewin <https://github.com/supdrewin>
+ * main.cpp is part of Sequence List Example.
+ * The Sequence List Example is free software: you can redistribute it
  * and/or modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation, either version 3 of
  * the License, or (at your option) any later version.
- * The SequenceList Example is distributed in the hope that it will be
+ * The Sequence List Example is distributed in the hope that it will be
  * useful, but WITHOUT ANY WARRANTY; without even the implied warranty
  * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
@@ -14,12 +14,11 @@
  */
 
 #include "SequenceList.hpp"
-#include "screen.hpp"
 
 // If not N, give N to 10
 // You can simply override
 // it with `-D N=<integer>'
-#ifndef N
+#if !defined(N)
 #define N 10
 #endif
 
@@ -33,10 +32,10 @@ struct patient : people {
 };
 
 // Define a sequence list of patients with 100 maxsize.
-using sequencelist = SequenceList<patient, 100>;
+using sequencelist = sequence_list<patient, 100>;
 
 template <> void sequencelist::init() {
-  screen::clear();
+  _clear_screen;
 
   patient s[N];
   for (int i = 0; i < N; i++) {
@@ -57,9 +56,9 @@ template <> void sequencelist::init() {
     std::cout << "请输入第" << i + 1 << "个病人的症状: ";
     std::cin >> s[i].symptom;
 
-    this->_insert(i, s[i]);
+    this->ins(i, s[i]);
 
-    screen::clear();
+    _clear_screen;
   }
 }
 
@@ -76,7 +75,6 @@ template <> int sequencelist::get(int i) {
             << this->list[i].age << '\t'    //
             << this->list[i].sex << '\t'    //
             << this->list[i].symptom << std::endl;
-
   return true;
 }
 
@@ -89,7 +87,6 @@ template <> int sequencelist::find(std::string x) {
     for (int i = 0; i < this->size; i++)
       if (x == this->list[i].name)
         return i;
-
   return -1;
 }
 

@@ -1,5 +1,5 @@
 /**
- * Copyright(C) 2021 Supdrewin <WITHOUT ANY WARRANTY>
+ * Copyright(C) 2021 Supdrewin <https://github.com/supdrewin>
  * Triangle.cpp is part of Sequence Queue Example.
  * The Sequence Queue Example is free software: you can redistribute it
  * and/or modify it under the terms of the GNU General Public License
@@ -15,44 +15,33 @@
 
 #include "SequenceQueue.hpp"
 
-using std::cout;
-using std::endl;
-
 void triangle(int n) {
-  SequenceQueue<int, 100> queue(1);
+  sequence_queue<int, 100> queue(1);
   int x, y = 0;
 
   for (int i = 0; i < n; i++) {
     // Output an inverted triangle.
     for (int j = 0; j < n - i; j++)
-      cout << "   ";
+      std::cout << "   ";
 
     // For output 1->\n->1.
-    queue.Append(0);
+    queue.append(0);
 
-    // i j   j   i j   j   j   i j
-    // 0 0   1   1 0   1   2   2 0
-    // y x y x y   x y x y x y   ...
-    // 0 1 1 0 0   1 1 1 1 0 0   ...
-    // + + - + - + + - + - + - + ...
-    // 0 1 1 1 0 0 1 1 2 1 1 0 0 ...
-    for (int j = 0; j <= i + 1; j++) {
-      x = queue.Delete();
-      if (i < n)
-        queue.Append(x + y);
-
-      if ((y = x))
-        cout << x << "    ";
+    for (int j = 0; j <= i + 1; j++) { // i j   j   i j   j   j   i j
+      x = queue.del();                 // 0 0   1   1 0   1   2   2 0
+      i < n ? queue.append(x + y) : 0; // y x y x y   x y x y x y   ...
+                                       // 0 1 1 0 0   1 1 1 1 0 0   ...
+      if ((y = x))                     // + + - + - + + - + - + - + ...
+        std::cout << x << "    ";      // 0 1 1 1 0 0 1 1 2 1 1 0 0 ...
       else
-        cout << endl;
+        std::cout << std::endl;
     }
   }
 }
 
-int main(int argc, char **argv) {
-  if (argc != 2 or atoi(argv[1]) <= 0)
-    return EXIT_FAILURE;
-
-  triangle(atoi(argv[1]));
+int main() {
+  int argument = std::atoi(argv[1]);
+  __assert(argc == 2 or argument > 0);
+  triangle(argument);
   return 0;
 }

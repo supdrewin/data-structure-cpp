@@ -13,11 +13,9 @@
  * along with this program.If not, see <https://www.gnu.org/licenses/>.
  */
 
-#pragma once
+// #pragma once
 
 #include "../try-2/SequenceList.hpp"
-#include "utility.hpp"
-#include <iostream>
 
 template <typename data_type> //
 struct elem_type {
@@ -27,7 +25,7 @@ struct elem_type {
 
 template <typename data_type, int line, int culomn> //
 class CompressedMatrix                              //
-    : SequenceList<elem_type<data_type>, line * culomn> {
+    : sequence_list<elem_type<data_type>, line * culomn> {
 protected:
   int max_line_number = line, max_column_number = culomn;
 
@@ -179,7 +177,7 @@ public:
    *  @param matrix <CompressedMatrix> a matrix to be multiplied
    */
   CompressedMatrix multiply(CompressedMatrix<data_type, culomn, line> matrix) {
-    CompressedMatrix<data_type, max(line, culomn), max(line, culomn)> tmp;
+    CompressedMatrix<data_type, __max(line, culomn), __max(line, culomn)> tmp;
     auto a = this->c_arr(), b = matrix.tranpose().c_arr();
 
     for (int i = 0, sum = 0; i < max_line_number; ++i)
