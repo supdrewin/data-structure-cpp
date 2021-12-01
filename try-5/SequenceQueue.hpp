@@ -1,5 +1,5 @@
 /**
- * Copyright(C) 2021 Supdrewin <WITHOUT ANY WARRANTY>
+ * Copyright(C) 2021 Supdrewin <https://github.com/supdrewin>
  * SequenceQueue.hpp is part of Sequence Queue Example.
  * The Sequence Queue Example is free software: you can redistribute it
  * and/or modify it under the terms of the GNU General Public License

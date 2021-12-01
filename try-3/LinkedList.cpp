@@ -1,5 +1,5 @@
 /**
- * Copyright(C) 2021 Supdrewin <WITHOUT ANY WARRANTY>
+ * Copyright(C) 2021 Supdrewin <https://github.com/supdrewin>
  * LinkedList.cpp is part of Single Linked List Example.
  * The Single Linked List Example is free software: you can redistribute
  * it and/or modify it under the terms of the GNU General Public License
@@ -14,55 +14,81 @@
  */
 
 #include "LinkedList.hpp"
-using SingleLinkedList = //
-    List::SingleNode<int>;
 
-using std::cin;
-using std::cout;
-using std::endl;
-
-int main(/* No needed here. */) {
-  SingleLinkedList *head;
-  int i, x;
-
-  head->init(&head);
-
-  // Insert integer 0 ~ 99 with 5 into single linked list.  //
-  for (i = 0; i < 100; i += 5)                              //
-    head->Insert(head, i);                                  //
-                                                            //
-  cout << "Singe linked list has 20 integers is generated:" //
-       << endl;                                             //
-  head->get(head, i, x);                                    //
-
-  // --------------- Start Test List Delete --------------- //
-
-  cout << "please insert integer you want to delete: ";
-  cin >> x;
-
-  cout << "Deleted integer: "           //
-       << head->Delete(head, x) << endl //
-       << "Remaining integers:" << endl;
-  head->get(head, i, x);
-
-  // --------------- Finish Test List Delete --------------- //
-
-  // --------------- Start Test List Insert --------------- //
-
-  cout << "Please insert a intege you want to add: ";
-  cin >> x;
-
-  head->Insert(head, x);
-
-  cout << "Added integer: " << x << endl //
-       << "Remaining integers:" << endl;
-  head->get(head, i, x);
-
-  // --------------- Finish Test List Insert --------------- //
-
-  // Destroy list and then return:
-  head->Destroy(&head);
-  return 0;
+void ListInitiate(SingleLinkedList **head) {
+  if ((*head = (SingleLinkedList *)      //
+       malloc(sizeof(SingleLinkedList))) //
+      == nullptr)
+    exit(EXIT_FAILURE);
+  (*head)->next = nullptr;
 }
 
-// vim:set nu rnu cuc cul ts=2 sw=2 et si:
+int ListLength(SingleLinkedList *head) {
+  SingleLinkedList *p = head;
+  int size;
+  for (size = 0; p->next != nullptr; size++)
+    p = p->next;
+  return size;
+}
+
+void ListGet(SingleLinkedList *head, //
+             int i, ElemType *x) {   //
+  SingleLinkedList *p;               //
+                                     //
+  for (p = head;                     //
+       p->next != nullptr and        //
+       i >= 0;
+       i--)
+    p = p->next;
+  *x = p->data;
+}
+
+void ListInsert(SingleLinkedList *head,  //
+                ElemType x) {            //
+  SingleLinkedList *p, *q;               //
+                                         //
+  for (p = head;                         //
+       p->next != nullptr;               //
+       p = p->next)                      //
+    if (x <= p->next->data)              //
+      break;                             //
+                                         //
+  if ((q = (SingleLinkedList *)          //
+       malloc(sizeof(SingleLinkedList))) //
+      == nullptr)
+    exit(EXIT_FAILURE);
+  q->data = x;
+  q->next = p->next;
+  p->next = q;
+}
+
+bool ListDelete(SingleLinkedList *head,        //
+                ElemType x) {                  //
+  SingleLinkedList *p, *q;                     //
+                                               //
+  for (p = head;                               //
+       p->next->next != nullptr;               // make sure it isn't null
+       p = p->next)                            // \n         \n
+    if (x == p->next->data)                    //  \n         \n
+      break;                                   //   \n         \n
+                                               //    \n         \n
+  if (x != p->next->data) {                    //     \n         \n
+    std::cerr << "ListDelete: Data not found!" //      \n         \n
+              << std::endl;                    //       \n         \n
+    return false;                              //        \n         \n
+  }                                            //         \n         \n
+                                               //          \n         \n
+  q = p->next;                                 //           \n         \n
+  p->next = q->next;                           // q->next = p->next->next
+  free(q);
+  return true;
+}
+
+void Destroy(SingleLinkedList **head) {
+  SingleLinkedList *p;
+  while (*head != nullptr) {
+    p = *head;
+    *head = (*head)->next;
+    free(p);
+  }
+}

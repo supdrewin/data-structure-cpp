@@ -1,5 +1,5 @@
 /**
- * Copyright(C) 2021 Supdrewin <WITHOUT ANY WARRANTY>
+ * Copyright(C) 2021 Supdrewin <https://github.com/supdrewin>
  * CheckBrackets.cpp is part of Linked Stack Example.
  * The Sequence Stack Example is free software: you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as published by
