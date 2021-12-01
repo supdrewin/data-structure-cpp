@@ -13,8 +13,6 @@
  * with this program.If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <iostream>
-
 #include "utility.hpp"
 
 int add(int n) { return n ? n += add(n - 1) : n; }

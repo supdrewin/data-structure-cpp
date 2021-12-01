@@ -13,8 +13,8 @@
  * along with this program.If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef __SEQUENCE_LIST_HPP
-#define __SEQUENCE_LIST_HPP
+#ifndef __sequence_list_hpp
+#define __sequence_list_hpp
 
 #include <iostream>
 
@@ -29,13 +29,13 @@ public:
   SequenceList() { this->init(); }
   ~SequenceList() {}
 
-  void init() {}
-  int get(int) {}
-  int find(std::string) {}
+  virtual void init() {}
+  virtual int get(int) {}
+  virtual int find(std::string) {}
 
   int length() { return this->size; }
 
-  int _insert(int i, elem_type x) {
+  bool ins(int i, elem_type x) {
     if (this->size >= max_size)
       std::cerr << __PRETTY_FUNCTION__     //
                 << ": Too full to insert!" //
@@ -55,7 +55,7 @@ public:
     return false;
   }
 
-  int _delete(int i, elem_type *x = nullptr) {
+  bool del(int i, elem_type *x = nullptr) {
     if (this->size <= 0)
       std::cerr << __PRETTY_FUNCTION__ //
                 << ": Nothing to do!"  //
@@ -78,6 +78,6 @@ public:
   }
 };
 
-#endif /* __SEQUENCE_LIST_HPP */
+#endif // !__sequence_list_hpp
 
 // vim:set nu rnu cuc cul ts=2 sw=2 et si:

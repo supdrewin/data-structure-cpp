@@ -6,3 +6,5 @@
 # Binary files
 *.app
 *.exe
+*.o
+*.a

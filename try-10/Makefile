@@ -1,30 +1,32 @@
 PROJECT   = HuffmanTree
 SHELL     = zsh
-EXEC      = app
 
-ifeq ($(LLVM), 1)
-  CXX     = clang++
-  FLAGS   = -fuse-ld=lld -flto=thin -stdlib=libc++
-  MESSAGE = using LLVM-Clang toolkits
-else
-  FLAGS   = -flto -static
-endif
+PLATFORM    = posix
+EXEC        = app
+CXX         = clang++
+CXXFLAGS    = -I../include -std=c++2a -O2 -pipe
+LDFLAGS     = -fuse-ld=lld -flto=thin
 
 ifeq ($(CROSS), 1)
-  CXX     = x86_64-w64-mingw32-g++
-  MESSAGE = with MinGW-w64 target
-  EXEC    = exe
+  TARGET    = x86_64-w64-mingw32
+  PLATFORM  = windows
+  EXEC      = exe
+  CXX       = $(TARGET)-g++
+  CXXFLAGS ?=
+  LDFLAGS   =
 endif
 
-INPUT     = || :
-OUTPUT    = $(PWD)/$(PROJECT).$(EXEC)
-FLAGS    += -finline-functions -Wall -g -O2 -pipe -o $(OUTPUT)
+CXXFLAGS   += -finline-functions -Wall -g
+LDFLAGS    += -L../lib/$(PLATFORM) -static -lutility
+
+INPUT       = || :
+OUTPUT      = ./$(PROJECT).$(EXEC)
 
 *.cpp: clean
 
 all: *.cpp
-	@echo '\e[33;1mCompiling $(MESSAGE)...\e[0;36m'
-	$(CXX) $(FLAGS) $^ -I../include
+	@echo '\e[33;1mMaking $^ using $(CXX)...\e[0;36m'
+	$(CXX) $(CXXFLAGS) -o $(OUTPUT) $^ $(LDFLAGS)
 
 .PHONY: test clean
 
@@ -32,6 +34,6 @@ test: all
 	@echo '\e[33;1mNow testing...\e[0;36m'
 	-[[ $(EXEC) = exe ]] || $(OUTPUT) $(INPUT)
 
-clean: ;clear
-	@echo '\e[33;1mClean up previous code...\e[0;36m'
+clean: ; clear
+	@echo '\e[33;1mClean up for $(PLATFORM)...\e[0;36m'
 	-rm -f $(OUTPUT)

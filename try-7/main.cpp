@@ -22,27 +22,6 @@ std::random_device rd;
 
 using MatrixNxN = CompressedMatrix<int, N, N>;
 
-/** Multipling MatrixNxN a and b then return c.
- * @return c <MatrixNxN> matrix after multipling
- * @param a <MatrixNxN> the 1st matrix to multiply
- * @param b <MatrixNxN> the 2nd matrix to multiply
- */
-MatrixNxN multiply(MatrixNxN a, MatrixNxN b) {
-  MatrixNxN c;
-
-  auto d = a.c_arr();
-  auto e = b.tranpose().c_arr();
-
-  for (int i = 0, sum = 0; i < N; ++i)
-    for (int j = 0; j < N; ++j, sum = 0) {
-      for (int k = 0; k < N; ++k)
-        sum += d.data[i][k] * e.data[k][j];
-      c.add(i, j, sum);
-    }
-
-  return c;
-}
-
 int main() {
   std::uniform_int_distribution<int> x(0, N - 1);
   std::uniform_int_distribution<int> y(0, N - 1);
@@ -66,7 +45,7 @@ int main() {
   n.print();                                  //
   std::cout << "is"                           //
             << std::endl;                     //
-  multiply(m, n).print();                     //
+  m.multiply(n).print();                      //
   std::cout << '.'                            //
             << std::endl;                     //
 

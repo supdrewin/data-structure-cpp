@@ -13,7 +13,7 @@
  * along with this program.If not, see <https://www.gnu.org/licenses/>.
  */
 
-#pragma once // Don't repeat compiling it.
+#pragma once
 
 #include <iostream>
 

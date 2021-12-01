@@ -15,7 +15,9 @@
 
 #pragma once
 
-#include "try-2/SequenceList.hpp"
+#include "../try-2/SequenceList.hpp"
+#include "utility.hpp"
+#include <iostream>
 
 template <typename data_type> //
 struct elem_type {
@@ -37,6 +39,7 @@ protected:
         for (int j = 0; j < culomn; ++j)
           this->data[i][j] = 0;
     }
+    virtual ~c_array() {}
   } arr;
 
 public:
@@ -51,11 +54,11 @@ public:
 
   int get_size() { return this->size; }
 
-  /** Convert compressed matrix to C-Style array.
-   * @return arr <c_array> converted C-Style array
-   * @param <void>
+  /** @brief Convert compressed matrix to C-Style array.
+   *  @return arr <c_array> converted C-Style array
+   *  @param <void>
    */
-  struct c_array c_arr() {
+  c_array c_arr() {
     for (int i = 0; i < this->size; ++i)
       arr.data[this->list[i].x][this->list[i].y] = //
           this->list[i].data;
@@ -63,11 +66,11 @@ public:
     return arr;
   }
 
-  /** Add data into position (x, y).
-   * @return <boolean> whether func success or not
-   * @param x <integer> the location of line
-   * @param y <integer> the location of column
-   * @param data <data_type> data adding
+  /** @brief Add data into position (x, y).
+   *  @return <boolean> whether func success or not
+   *  @param x <integer> the location of line
+   *  @param y <integer> the location of column
+   *  @param data <data_type> data adding
    */
   int add(int x, int y, data_type data) {
     // Check whether position (x, y) is vaild or not.
@@ -92,9 +95,9 @@ public:
         // If the position has recorded, override it!
         if (x == this->list[i].x and //
             y == this->list[i].y)
-          this->_delete(i);
+          this->del(i);
 
-        this->_insert( //
+        this->ins( //
             i,
             elem_type<data_type>{
                 x, y, data //
@@ -104,7 +107,7 @@ public:
       }
 
     // If not positions ge (x, y), add last!
-    this->_insert( //
+    this->ins( //
         this->size,
         elem_type<data_type>{
             x, y, data //
@@ -113,11 +116,11 @@ public:
     return true;
   }
 
-  /** Add data into position (x, y) and (y, x).
-   * @return <boolean> whether func success or not
-   * @param x <integer> the location of line
-   * @param y <integer> the location of column
-   * @param data <data_type> data adding
+  /** @brief Add data into position (x, y) and (y, x).
+   *  @return <boolean> whether func success or not
+   *  @param x <integer> the location of line
+   *  @param y <integer> the location of column
+   *  @param data <data_type> data adding
    */
   int sym_add(int x, int y, data_type data) {
     if (add(x, y, data) and //
@@ -126,9 +129,9 @@ public:
     return false;
   }
 
-  /** Print the regular graph of compressed matrix.
-   * @return <void>
-   * @param <void>
+  /** @brief Print the regular graph of compressed matrix.
+   *  @return <void>
+   *  @param <void>
    */
   void print() {
     for (int i = 0, k = 0; i < max_line_number; ++i) {
@@ -145,29 +148,47 @@ public:
     }
   }
 
-  /** Transpose this matrix and then return it.
-   * @return matrix <CompressedMatrix> transposed matrix
-   * @param <void>
+  /** @brief Transpose this matrix and then return it.
+   *  @return tmp <CompressedMatrix> transposed matrix
+   *  @param <void>
    */
   CompressedMatrix tranpose() {
-    CompressedMatrix matrix;
+    CompressedMatrix tmp;
 
-    matrix.max_line_number = this->max_column_number;
-    matrix.max_column_number = this->max_line_number;
-    matrix.size = this->size;
+    tmp.max_line_number = this->max_column_number;
+    tmp.max_column_number = this->max_line_number;
+    tmp.size = this->size;
 
     if (!this->empty()) {
       for (int i = 0, k = 0; i < this->max_column_number; ++i)
         for (int j = 0; j < this->size; ++j)
           if (this->list[j].y == i) {
-            matrix.list[k].x = this->list[j].y;
-            matrix.list[k].y = this->list[j].x;
-            matrix.list[k].data = this->list[j].data;
+            tmp.list[k].x = this->list[j].y;
+            tmp.list[k].y = this->list[j].x;
+            tmp.list[k].data = this->list[j].data;
 
             ++k;
           }
     }
 
-    return matrix;
+    return tmp;
+  }
+
+  /** @brief Multipling this with other matrix object.
+   *  @return tmp <CompressedMatrix> matrix obj after multipling
+   *  @param matrix <CompressedMatrix> a matrix to be multiplied
+   */
+  CompressedMatrix multiply(CompressedMatrix<data_type, culomn, line> matrix) {
+    CompressedMatrix<data_type, max(line, culomn), max(line, culomn)> tmp;
+    auto a = this->c_arr(), b = matrix.tranpose().c_arr();
+
+    for (int i = 0, sum = 0; i < max_line_number; ++i)
+      for (int j = 0; j < max_column_number; ++j, sum = 0) {
+        for (int k = 0; k < max_column_number; ++k)
+          sum += a.data[i][k] * b.data[k][j];
+        tmp.add(i, j, sum);
+      }
+
+    return tmp;
   }
 };

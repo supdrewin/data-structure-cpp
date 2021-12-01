@@ -1,30 +1,42 @@
-# PROJECT   = Decimal2other
-PROJECT   = CheckBrackets
+PROJECT   = LinkedStack
+SHELL     = zsh
 
-ifeq ($(LLVM), 1)
-AR        = llvm-ar
-CC        = clang
-CXX       = clang++
-CXXFLAGS += -flto=thin
-LDFLAGS  += -fuse-ld=lld
+PLATFORM    = posix
+EXEC        = app
+CXX         = clang++
+CXXFLAGS    = -I../include -std=c++2a -O2 -pipe
+LDFLAGS     = -fuse-ld=lld -flto=thin
+
+ifeq ($(CROSS), 1)
+  TARGET    = x86_64-w64-mingw32
+  PLATFORM  = windows
+  EXEC      = exe
+  CXX       = $(TARGET)-g++
+  CXXFLAGS ?=
+  LDFLAGS   =
 endif
 
-CXXFLAGS += -pipe -O2
+CXXFLAGS   += -finline-functions -Wall -g
+LDFLAGS    += -L../lib/$(PLATFORM) -static -lutility
 
-_ARGS     = $(ARGS)
-_ARGS    += -o $(PROJECT)
+INPUT       = || :
+OUTPUT      = ./$(TEST).$(EXEC)
 
-all: clean
-	$(CXX)  $(CXXFLAGS) \
-	        $(LDFLAGS) \
-	        $(_ARGS) \
-	        $(PROJECT).cpp
+# TEST      = Decimal2other
+# TEST      = CheckBrackets
+
+*.cpp: clean
+
+all: $(TEST).cpp
+	@echo '\e[33;1mMaking $^ using $(CXX)...\e[0;36m'
+	$(CXX) $(CXXFLAGS) -o $(OUTPUT) $^ $(LDFLAGS)
 
 .PHONY: test clean
 
 test: all
-# ./$(PROJECT) $(INPUT)
-	./$(PROJECT) "$(INPUT)"
+	@echo '\e[33;1mNow testing...\e[0;36m'
+	-[[ $(EXEC) = exe ]] || $(OUTPUT) $(INPUT)
 
-clean:
-	rm -f $(PROJECT)
+clean: ; clear
+	@echo '\e[33;1mClean up for $(PLATFORM)...\e[0;36m'
+	-rm -f $(OUTPUT)
