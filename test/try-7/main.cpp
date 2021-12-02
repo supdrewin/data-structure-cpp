@@ -14,40 +14,50 @@
  */
 
 #include <random>
-std::random_device rd;
 
 #include "CompressedMatrix.hpp"
 
 #define N 4
 
-using MatrixNxN = CompressedMatrix<int, N, N>;
-
 int main() {
-  std::uniform_int_distribution<int> x(0, N - 1);
-  std::uniform_int_distribution<int> y(0, N - 1);
-  std::uniform_int_distribution<int> data(0, N * N);
+  static std::uniform_int_distribution<int> n_1(0, N - 1);
+  static std::uniform_int_distribution<int> n_2_1(0, N * 2 - 1);
+  static std::uniform_int_distribution<int> n_n(0, N * N);
 
-  MatrixNxN m;
-  MatrixNxN n;
+  compressed_matrix<int, N, N * 2> m;
+  compressed_matrix<int, N * 2, N> n;
 
-  for (int i = 0; i < N * N; ++i)
-    m.sym_add(x(rd), y(rd), data(rd));
+  std::random_device rd;
 
-  for (int i = 0; i < N * N; ++i)
-    n.sym_add(x(rd), y(rd), data(rd));
+  for (int i = 0; i < N * N * 2; ++i)
+    m.add(n_1(rd), n_2_1(rd), n_n(rd));
 
-  //////////////////////////////////////////////
-  std::cout << "The sum of multipling matrix" //
-            << std::endl;                     //
-  m.print();                                  //
-  std::cout << "and"                          //
-            << std::endl;                     //
-  n.print();                                  //
-  std::cout << "is"                           //
-            << std::endl;                     //
-  m.multiply(n).print();                      //
-  std::cout << '.'                            //
-            << std::endl;                     //
+  for (int i = 0; i < N * N * 2; ++i)
+    n.add(n_2_1(rd), n_1(rd), n_n(rd));
+
+  // -----------------------------------------
+
+  _print_info("The sum of multipling matrix", );
+  m.print();
+
+  _print_info("and", );
+  n.print();
+
+  _print_info("is", );
+  m.multiply(n).print();
+
+  std::cout << std::endl;
+
+  // -----------------------------------------
+
+  _print_info("The sum of multipling matrix", );
+  n.print();
+
+  _print_info("and", );
+  m.print();
+
+  _print_info("is", );
+  n.multiply(m).print();
 
   return 0;
 }

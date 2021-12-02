@@ -18,16 +18,29 @@
 int main() {
   adjacency_matrix<6> am("abcdef");
 
-  am.add_edge(2, 1, 2);
-  am.add_edge(1, 3, 5);
-  am.add_edge(1, 4, 30);
-  am.add_edge(3, 2, 15);
-  am.add_edge(2, 5, 8);
-  am.add_edge(5, 4, 4);
-  am.add_edge(6, 4, 10);
-  am.add_edge(6, 5, 18);
-  am.add_edge(3, 6, 7);
+  am.add_edge(1, 0, 2);
+  am.add_edge(0, 2, 5);
+  am.add_edge(0, 3, 30);
+  am.add_edge(2, 1, 15);
+  am.add_edge(1, 4, 8);
+  am.add_edge(4, 3, 4);
+  am.add_edge(5, 3, 10);
+  am.add_edge(5, 4, 18);
+  am.add_edge(2, 5, 7);
 
+  am.print();
+  am.delete_edge(2);
+  am.print();
+  am.delete_vertex(2);
+  am.print();
+  am.delete_vertex(4);
+  am.print();
+
+  am.add_vertex('z');
+  am.print();
+  am.add_vertex('c');
+  am.print();
+  am.add_vertex('d');
   am.print();
 
   return 0;

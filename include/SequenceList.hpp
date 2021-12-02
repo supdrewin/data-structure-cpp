@@ -13,7 +13,7 @@
  * along with this program.If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef __sequence_list_hpp
+#if not defined(__sequence_list_hpp)
 #define __sequence_list_hpp
 
 #include "utility.hpp"
@@ -26,16 +26,12 @@ protected:
                             // default to 0(empty)
 
 public:
-  sequence_list() { this->init(); }
+  sequence_list() = default;
   virtual ~sequence_list() {}
 
-  virtual void init() {}
-  virtual int get(int) { return false; }
-  virtual int find(std::string) { return false; }
+  int get_size() { return this->size; }
 
-  int length() { return this->size; }
-
-  bool ins(int i, elem_type x) {
+  bool insert(int i, elem_type x) {
     if (this->size >= max_size)
       std::cerr << __PRETTY_FUNCTION__     //
                 << ": Too full to insert!" //
@@ -45,7 +41,7 @@ public:
                 << ": Invailed argument `i'!" //
                 << std::endl;
     else {
-      for (int j = this->size; j > i; j--)
+      for (int j = this->size; j > i; --j)
         this->list[j] = this->list[j - 1];
 
       this->list[i] = x;
@@ -55,7 +51,7 @@ public:
     return false;
   }
 
-  bool del(int i, elem_type *x = nullptr) {
+  bool erase(int i, elem_type *x = nullptr) {
     if (this->size <= 0)
       std::cerr << __PRETTY_FUNCTION__ //
                 << ": Nothing to do!"  //
@@ -68,7 +64,7 @@ public:
       if (x != nullptr)
         *x = this->list[i];
 
-      for (int j = i + 1; j <= this->size - 1; j++)
+      for (int j = i + 1; j <= this->size - 1; ++j)
         this->list[j - 1] = this->list[j];
 
       this->size--;
@@ -78,6 +74,6 @@ public:
   }
 };
 
-#endif // !__sequence_list_hpp
+#endif // not defined(__sequence_list_hpp)
 
 // vim:set nu rnu cuc cul ts=2 sw=2 et si:

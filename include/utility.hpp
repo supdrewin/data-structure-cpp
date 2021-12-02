@@ -12,7 +12,7 @@
  * with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#if !defined(__utility_hpp)
+#if not defined(__utility_hpp)
 #define __utility_hpp 1
 
 #undef main
@@ -69,9 +69,9 @@
 
 #undef _print_info
 #define _print_info(msg, argv)                                                 \
-  std::system(std::string("echo\t" + std::string(argv) + "\t'" +               \
+  std::system(std::string("echo\t" + std::string(argv) + "\t\"" +              \
                           _control_character("32;1m") + msg +                  \
-                          _control_character("0;35m") + "\t'")                 \
+                          _control_character("0;35m") + "\t\"")                \
                   .c_str());
 
 #endif // defined(_WIN32)
@@ -89,4 +89,4 @@ void _assert_fail(std::string assertion, std::string file, unsigned int line,
 
 #endif // defined(__cplusplus)
 
-#endif // !defined(__utility_hpp)
+#endif // not defined(__utility_hpp)

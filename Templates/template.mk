@@ -3,7 +3,7 @@ SHELL     = bash
 PLATFORM ?= posix
 EXEC     ?= app
 
-CXXFLAGS    = -I$(PREFIX)/include -std=c++2a
+CXXFLAGS   += -I$(PREFIX)/include -std=c++2a
 CXXFLAGS   += -finline-functions -Wall -g -O2 -pipe
 LDFLAGS    += -L$(PREFIX)/lib/$(PLATFORM) -static -lutility
 

@@ -15,13 +15,6 @@
 
 #include "SequenceList.hpp"
 
-// If not N, give N to 10
-// You can simply override
-// it with `-D N=<integer>'
-#if !defined(N)
-#define N 10
-#endif
-
 struct people {
   std::string name, sex;
   int age = 0;
@@ -32,83 +25,96 @@ struct patient : people {
 };
 
 // Define a sequence list of patients with 100 maxsize.
-using sequencelist = sequence_list<patient, 100>;
+class sequencelist : public sequence_list<patient, 100> {
+public:
+  sequencelist(int n) { this->init(n); }
+  ~sequencelist() {}
 
-template <> void sequencelist::init() {
-  _clear_screen;
-
-  patient s[N];
-  for (int i = 0; i < N; i++) {
-    std::cout << "------请输入第" << i + 1 << "个病人的信息 " << std::endl;
-
-    std::cout << "请输入第" << i + 1 << "个病人的病历号: ";
-    std::cin >> s[i].number;
-
-    std::cout << "请输入第" << i + 1 << "个病人的姓名: ";
-    std::cin >> s[i].name;
-
-    std::cout << "请输入第" << i + 1 << "个病人的年龄: ";
-    std::cin >> s[i].age;
-
-    std::cout << "请输入第" << i + 1 << "个病人的性别: ";
-    std::cin >> s[i].sex;
-
-    std::cout << "请输入第" << i + 1 << "个病人的症状: ";
-    std::cin >> s[i].symptom;
-
-    this->ins(i, s[i]);
-
+  void init(int n) {
     _clear_screen;
+
+    patient s[n];
+    for (int i = 0; i < n; i++) {
+      std::cout << "------Please insert the " << i + 1
+                << "th patient's information" << std::endl;
+
+      std::cout << "Please insert the " << i + 1 //
+                << "th patient's number: ";
+      std::cin >> s[i].number;
+
+      std::cout << "Please insert the " << i + 1 //
+                << "th patient's name: ";
+      std::cin >> s[i].name;
+
+      std::cout << "Please insert the " << i + 1 //
+                << "th patient's age: ";
+      std::cin >> s[i].age;
+
+      std::cout << "Please insert the " << i + 1 //
+                << "th patient's sex: ";
+      std::cin >> s[i].sex;
+
+      std::cout << "Please insert the " << i + 1 //
+                << "th patient's symptom: ";
+      std::cin >> s[i].symptom;
+
+      this->insert(i, s[i]);
+
+      _clear_screen;
+    }
   }
-}
 
-template <> int sequencelist::get(int i) {
-  if (i < 0 or i > this->size - 1) {
-    std::cerr << __PRETTY_FUNCTION__        //
-              << ": Invailed argument `i'!" //
-              << std::endl;
-    return false;
+  int get(int i) {
+    if (i < 0 or i > this->size - 1) {
+      std::cerr << __PRETTY_FUNCTION__        //
+                << ": Invailed argument `i'!" //
+                << std::endl;
+      return false;
+    }
+
+    std::cout << this->list[i].number << '\t' //
+              << this->list[i].name << '\t'   //
+              << this->list[i].age << '\t'    //
+              << this->list[i].sex << '\t'    //
+              << this->list[i].symptom << std::endl;
+    return true;
   }
 
-  std::cout << this->list[i].number << '\t' //
-            << this->list[i].name << '\t'   //
-            << this->list[i].age << '\t'    //
-            << this->list[i].sex << '\t'    //
-            << this->list[i].symptom << std::endl;
-  return true;
-}
-
-template <> int sequencelist::find(std::string x) {
-  if (this->size <= 0)
-    std::cerr << __PRETTY_FUNCTION__ //
-              << ": Nothing to do!"  //
-              << std::endl;
-  else
-    for (int i = 0; i < this->size; i++)
-      if (x == this->list[i].name)
-        return i;
-  return -1;
-}
+  int find(std::string name) {
+    if (this->size <= 0)
+      std::cerr << __PRETTY_FUNCTION__ //
+                << ": Nothing to do!"  //
+                << std::endl;
+    else
+      for (int i = 0; i < this->size; i++)
+        if (name == this->list[i].name)
+          return i;
+    return -1;
+  }
+};
 
 int main() {
-  sequencelist *mylist = new sequencelist();
+  sequencelist mylist(5);
 
   std::cout << "****************** Database of patients *****************"
             << std::endl;
 
-  for (int i = 0; i < mylist->length(); i++)
-    mylist->get(i);
+  std::cout << "number" << '\t' << "name" << '\t' << "age" << '\t' //
+            << "sex" << '\t' << "symptom" << std::endl;
+
+  for (int i = 0; i < mylist.get_size(); i++)
+    mylist.get(i);
 
   std::cout << "*************** Following are My Homework ***************"
             << std::endl;
 
   std::cout << "Please insert the name of patient you want to find: ";
+
   std::string find;
   std::cin >> find;
 
-  mylist->get(mylist->find(find));
+  mylist.get(mylist.find(find));
 
-  delete mylist;
   return 0;
 }
 

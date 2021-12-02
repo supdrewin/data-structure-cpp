@@ -13,7 +13,7 @@
  * this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#if !defined(__sequence_stack_hpp)
+#if not defined(__sequence_stack_hpp)
 #define __sequence_stack_hpp
 
 #include "utility.hpp"
@@ -65,4 +65,4 @@ public:
   }
 };
 
-#endif // !defined(__sequence_stack_hpp)
+#endif // not defined(__sequence_stack_hpp)
