@@ -1,5 +1,5 @@
 all:
-	$(PWD)/build.sh $(PWD) $@
+	$(PWD)/build.sh $(PWD) $@ TOOLKIT=$(TOOLKIT)
 
 clean:
-	$(PWD)/build.sh $(PWD) $@
+	rm -rf $(PWD)/build

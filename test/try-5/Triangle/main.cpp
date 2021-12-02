@@ -40,8 +40,7 @@ void triangle(int n) {
 }
 
 int main() {
-  int argument = std::atoi(argv[1]);
-  __assert(argc == 2 or argument > 0);
-  triangle(argument);
+  __assert(argc == 2 and std::atoi(argv[1]) > 0);
+  triangle(std::atoi(argv[1]));
   return 0;
 }

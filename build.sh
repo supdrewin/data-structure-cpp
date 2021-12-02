@@ -1,13 +1,11 @@
-#!/bin/zsh
+#!/bin/bash
 
 export LANG=en_US.UTF-8
 
 clear
 
-for arg in '' 'CROSS=1'; do
-	echo "\e[33;1m$(date) - Making $2 by $USER...\e[0;36m"
+echo -e "\e[33;1m$(date) - Making ${PWD##*/} by $USER...\e[0;36m"
 
-	for dir in $(find test -maxdepth 2 -type d); do
-		make -C $dir PREFIX=$1 $arg $2
-	done
-done
+while read -rd '' dir; do
+	make -C "$dir" PREFIX="$1" "$2" "$3"
+done < <(find test/* -type d -print0)

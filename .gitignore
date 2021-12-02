@@ -5,9 +5,4 @@
 
 # Build directory
 build/
-
-# Binary files
-*.app
-*.exe
-*.o
-*.a
+lib/

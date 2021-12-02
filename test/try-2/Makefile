@@ -1,2 +1,2 @@
 PROJECT = SequenceList
-include $(PREFIX)/Templates/template.make
+include $(PREFIX)/Templates/template$(TOOLKIT).mk
