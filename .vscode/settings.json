@@ -2,9 +2,6 @@
     "clangd.fallbackFlags": [
         "-I${workspaceFolder}/include"
     ],
-    "code-runner.executorMapByFileExtension": {
-        ".app": "sh -c $dir$fileName"
-    },
     "editor.bracketPairColorization.enabled": true,
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
