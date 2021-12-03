@@ -2,9 +2,20 @@
 
 case $1 in
 1)
-	for exec in $(find build -type f -name *.exe); do wine $exec; done
+	command -v wine &>/dev/null &&
+		run=wine &&
+		name="*.exe" ||
+		name="*.app"
 	;;
 *)
-	for exec in $(find build -type f -name *.app); do $exec; done
+	name="*.app"
 	;;
 esac
+
+name=$(find build -name "$name")
+
+for exec in $name; do
+	$run "$exec" 2>/dev/null
+	echo Press any key to continue
+	read -rn 1
+done
