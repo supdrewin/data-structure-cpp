@@ -63,7 +63,7 @@
 #define _print_warning(msg)                                                    \
   std::system(std::string("echo\t" + _control_character("31;1m") +             \
                           __PRETTY_FUNCTION__ + ":\t" + msg +                  \
-                          _control_character("0;35m") + "\a")                  \
+                          _control_character("0;35m") + '\a')                  \
                   .c_str())
 
 #else

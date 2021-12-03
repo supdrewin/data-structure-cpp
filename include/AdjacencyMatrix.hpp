@@ -58,7 +58,7 @@ public:
   bool add_vertex(char vertex) {
     for (auto v : this->vertices)
       if (v == vertex) {
-        _print_warning("Warning for existing vertex");
+        _print_warning("Warning for existing vertex!");
         return false;
       }
     this->vertices += vertex;
