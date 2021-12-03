@@ -1,20 +1,22 @@
-PROJECT  = utility
-SHELL    = bash
+PROJECT   = utility
+SHELL     = bash
 
-AR       = llvm-ar
-ARFLAGS  = --rsp-quoting=$(PLATFORM) rc
+AR        = llvm-ar
+ARFLAGS   = --rsp-quoting=$(PLATFORM) rc
 
-PLATFORM = posix
-CXX      = clang++
+PLATFORM  = posix
+CXX       = clang++
+CXXFLAGS  = -std=c++2a -pipe -I$(PREFIX)/include -O2
 
 ifeq ($(CROSS), 1)
-TARGET   = x86_64-w64-mingw32
-PLATFORM = windows
-CXX      = $(TARGET)-g++
+TARGET    = x86_64-w64-mingw32
+PLATFORM  = windows
+CXX       = $(TARGET)-g++
+else
+CXXFLAGS += -stdlib=libc++
 endif
 
-CXXFLAGS = -I../include -pipe -O2
-OUTPUT   = ../lib/$(PLATFORM)/lib$(PROJECT).a
+OUTPUT    = $(PREFIX)/lib/$(PLATFORM)/lib$(PROJECT).a
 
 all: *.o; @mkdir -p ../lib/$(PLATFORM)
 	@echo -e "\e[33;1mMaking $^ using $(AR)...\e[0;36m"

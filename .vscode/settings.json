@@ -1,8 +1,14 @@
 {
     "clangd.fallbackFlags": [
-        "-I${workspaceFolder}/include"
+        "-std=c++2a",
+        "-I${workspaceFolder}/include",
+        "-Wall",
+        "-stdlib=libc++",
+        "-fuse-ld=lld"
     ],
     "editor.bracketPairColorization.enabled": true,
+    "editor.fontFamily": "FiraCode Nerd Font",
+    "editor.fontLigatures": true,
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
     "editor.formatOnType": true,

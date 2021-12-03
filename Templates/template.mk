@@ -3,15 +3,15 @@ SHELL     = bash
 PLATFORM ?= posix
 EXEC     ?= app
 
-CXXFLAGS   += -I$(PREFIX)/include -std=c++2a
-CXXFLAGS   += -finline-functions -Wall -g -O2 -pipe
-LDFLAGS    += -L$(PREFIX)/lib/$(PLATFORM) -static -lutility
+CXXFLAGS += -std=c++2a -pipe -I$(PREFIX)/include
+CXXFLAGS += -Wall -g -O2 -finline-functions
+LDFLAGS  += -L$(PREFIX)/lib/$(PLATFORM) -static -lutility
 
-INPUT       = || :
-OUTPUT      = $(PREFIX)/build/$(PROJECT).$(EXEC)
+INPUT     = || :
+OUTPUT    = $(PREFIX)/build/$(PROJECT).$(EXEC)
 
 all: *.cpp; @mkdir -p $(PREFIX)/build
-	@echo -e "\e[33;1m`date` - Making $^ using $(CXX)...\e[0;36m"
+	@echo -e "\e[33;1m`date` - Making $^($(PROJECT)) using $(CXX)...\e[0;36m"
 	$(CXX) $(CXXFLAGS) -o $(OUTPUT) $^ $(LDFLAGS)
 
 .PHONY: test clean

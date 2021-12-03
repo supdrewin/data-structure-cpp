@@ -44,7 +44,7 @@ public:
   bool add_vertex(char vertex) {
     for (auto v : this->vertices)
       if (v == vertex) {
-        _print_info(__func__ + ": Warning for exist vertex!", );
+        _print_info(__PRETTY_FUNCTION__ + ": Warning for exist vertex!", );
         return false;
       }
 
