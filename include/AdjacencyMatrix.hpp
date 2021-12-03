@@ -24,7 +24,6 @@ template <int max_vertex_number>
 class adjacency_matrix
     : public compressed_matrix<int, max_vertex_number, max_vertex_number> {
 protected:
-  // edges;
   std::string vertices;
   int vertices_number;
 
@@ -36,22 +35,37 @@ public:
   }
   virtual ~adjacency_matrix() {}
 
+  //----------------- vertices number ----------------------------//
   void set_vertices_number() { this->vertices_number = this->vertices.size(); }
   int get_vertices_number() { return this->vertices_number; }
 
+  void print_vertices_number() {
+    _print_info("The number of vertices:", "-n");
+    std::cout << this->vertices_number << std::endl;
+  }
+  //----------------- vertices number ----------------------------//
+
+  //-------------------- edges number ----------------------------//
   int edges_number() { return this->get_size(); }
 
+  void print_edges_number() {
+    _print_info("The number of edges:", "-n");
+    std::cout << this->edges_number() << std::endl;
+  }
+  //-------------------- edges number ----------------------------//
+
+  //-------------------------- vertex ----------------------------//
   bool add_vertex(char vertex) {
     for (auto v : this->vertices)
       if (v == vertex) {
-        _print_info(__PRETTY_FUNCTION__ + ": Warning for exist vertex!", );
+        _print_warning("Warning for existing vertex");
         return false;
       }
-
     this->vertices += vertex;
     this->set_vertices_number();
     return true;
   }
+
   void delete_vertex(int index) {
     this->vertices.erase(index, 1);
     this->set_vertices_number();
@@ -60,10 +74,13 @@ public:
   void delete_vertex(char vertex) {
     this->delete_vertex(this->vertices.find_first_of(vertex));
   }
+  //-------------------------- vertex ----------------------------//
 
+  //-------------------------- edge ------------------------------//
   bool add_edge(int head, int end, int weight) {
     return this->add(head, end, weight);
   }
+
   bool delete_edge(int index) { return this->erase(index); }
   bool delete_edge(int head, int end) { return this->pos_erase(head, end); }
 
@@ -79,14 +96,9 @@ public:
           this->list[i].culomn--;
       }
   }
+  //-------------------------- edge ------------------------------//
 
-  void print() {
-    _print_info("The number of vertices:", "-n");
-    std::cout << this->vertices_number << std::endl;
-
-    _print_info("The number of edges:", "-n");
-    std::cout << this->edges_number() << std::endl;
-
+  void print_matrix() {
     _print_info("Now print this adjacency matrix:", );
     for (int i = 0, k = 0; i < this->get_vertices_number(); ++i) {
       std::cout << vertices[i];
@@ -98,6 +110,11 @@ public:
                           : (i == j ? 0 : -1));
       std::cout << std::endl;
     }
+  }
+  void print() {
+    this->print_vertices_number();
+    this->print_edges_number();
+    this->print_matrix();
   }
 };
 

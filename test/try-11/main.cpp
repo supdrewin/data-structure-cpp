@@ -16,7 +16,7 @@
 #include "AdjacencyMatrix.hpp"
 
 int main() {
-  adjacency_matrix<6> am("abcdef");
+  adjacency_matrix<26> am("abcdef");
 
   am.add_edge(1, 0, 2);
   am.add_edge(0, 2, 5);
