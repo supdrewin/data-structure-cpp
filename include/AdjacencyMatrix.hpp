@@ -68,7 +68,6 @@ public:
   bool delete_edge(int head, int end) { return this->pos_erase(head, end); }
 
   void trim_edges_of_vertex(int vertex) {
-    // TODO: Trim all edges of a vertex
     for (int i = 0; i < this->get_size(); ++i)
       if (this->list[i].line == vertex or //
           this->list[i].culomn == vertex)
