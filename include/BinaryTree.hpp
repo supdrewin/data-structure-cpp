@@ -13,8 +13,8 @@
  * with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#if not defined(__binary_tree_hpp)
-#define __binary_tree_hpp
+#ifndef __binary_tree_hpp
+#define __binary_tree_hpp 1
 
 template <typename _data> //
 class binary_tree {
@@ -43,4 +43,4 @@ public:
   int destroy(node *n) { return n ? destroy(n) : false; }
 };
 
-#endif // not defined(__binary_tree_hpp)
+#endif // !__binary_tree_hpp

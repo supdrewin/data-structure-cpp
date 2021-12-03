@@ -13,8 +13,8 @@
  * along with this program.If not, see <https://www.gnu.org/licenses/>.
  */
 
-#if not defined(__sequence_queue_hpp)
-#define __sequence_queue_hpp
+#ifndef __sequence_queue_hpp
+#define __sequence_queue_hpp 1
 
 #include "utility.hpp"
 
@@ -57,4 +57,4 @@ public:
   }
 };
 
-#endif // not defined(__sequence_queue_hpp)
+#endif // !__sequence_queue_hpp

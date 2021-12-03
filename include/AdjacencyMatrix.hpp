@@ -13,8 +13,8 @@
  * with this program.If not, see <https://www.gnu.org/licenses/>.
  */
 
-#if not defined(__adjacency_matrix_hpp)
-#define __adjacency_matrix_hpp
+#ifndef __adjacency_matrix_hpp
+#define __adjacency_matrix_hpp 1
 
 #include <iomanip>
 
@@ -122,4 +122,4 @@ public:
   }
 };
 
-#endif // not defined(__adjacency_matrix_hpp)
+#endif // !__adjacency_matrix_hpp

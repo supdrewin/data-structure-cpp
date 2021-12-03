@@ -13,8 +13,8 @@
  * along with this program.If not, see <https://www.gnu.org/licenses/>.
  */
 
-#if not defined(__linked_list_hpp)
-#define __linked_list_hpp
+#ifndef __linked_list_hpp
+#define __linked_list_hpp 1
 
 #include "utility.hpp"
 
@@ -31,4 +31,4 @@ void ListInsert(SingleLinkedList *head, ElemType x);
 bool ListDelete(SingleLinkedList *head, ElemType x);
 void Destroy(SingleLinkedList **head);
 
-#endif // not defined(__linked_list_hpp)
+#endif // !__linked_list_hpp

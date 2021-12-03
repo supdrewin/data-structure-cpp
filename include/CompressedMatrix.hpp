@@ -13,8 +13,8 @@
  * along with this program.If not, see <https://www.gnu.org/licenses/>.
  */
 
-#if not defined(__compressed_matrix_hpp)
-#define __compressed_matrix_hpp
+#ifndef __compressed_matrix_hpp
+#define __compressed_matrix_hpp 1
 
 #include "SequenceList.hpp"
 
@@ -174,4 +174,4 @@ public:
   }
 };
 
-#endif // not defined(__compressed_matrix_hpp)
+#endif // !__compressed_matrix_hpp

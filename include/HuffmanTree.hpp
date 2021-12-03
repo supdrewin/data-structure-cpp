@@ -13,8 +13,8 @@
  * along with this program.If not, see <https://www.gnu.org/licenses/>.
  */
 
-#if not defined(__huffman_tree_hpp)
-#define __huffman_tree_hpp
+#ifndef __huffman_tree_hpp
+#define __huffman_tree_hpp 1
 
 #include <iomanip>
 
@@ -200,4 +200,4 @@ public:
   }
 };
 
-#endif // not defined(__huffman_tree_hpp)
+#endif // !__huffman_tree_hpp

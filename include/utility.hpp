@@ -12,7 +12,7 @@
  * with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#if not defined(__utility_hpp)
+#ifndef __utility_hpp
 #define __utility_hpp 1
 
 #undef main
@@ -30,7 +30,7 @@
 #undef __sizeof
 #define __sizeof(arr) sizeof(arr) / sizeof(*(arr))
 
-#if defined(_WIN32)
+#ifdef _WIN32
 
 #undef _path_separator
 #define _path_separator '\\'
@@ -40,12 +40,12 @@
 #undef _path_separator
 #define _path_separator '/'
 
-#endif // defined(_WIN32)
+#endif // _WIN32
 
-#if defined(__cplusplus)
+#ifdef __cplusplus
 #include <iostream>
 
-#if defined(_WIN32)
+#ifdef _WIN32
 
 #undef _clear_screen
 #define _clear_screen std::system("cls")
@@ -61,7 +61,7 @@
 #undef _control_character
 #define _control_character(code) std::string("\e[") + code
 
-#endif // defined(_WIN32)
+#endif // _WIN32
 
 #undef _assert_fail
 void _assert_fail(std::string assertion, std::string file, unsigned int line,
@@ -74,6 +74,6 @@ void _assert_fail(std::string assertion, std::string file, unsigned int line,
 #undef __assert
 #define __assert(expr) (static_cast<bool>(expr) ? void(0) : _ASSERT_FAIL(expr))
 
-#endif // defined(__cplusplus)
+#endif // __cplusplus
 
-#endif // not defined(__utility_hpp)
+#endif // !__utility_hpp
