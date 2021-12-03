@@ -37,26 +37,32 @@ int main() {
 
   // -----------------------------------------
 
-  _print_info("The sum of multipling matrix", );
+  std::cout << _control_character("32;1m") "The sum of multipling matrix"
+            << _control_character("0;35m") << std::endl;
   m.print();
 
-  _print_info("and", );
+  std::cout << _control_character("32;1m") "and" //
+            << _control_character("0;35m") << std::endl;
   n.print();
 
-  _print_info("is", );
+  std::cout << _control_character("32;1m") "is" //
+            << _control_character("0;35m") << std::endl;
   m.multiply(n).print();
 
   std::cout << std::endl;
 
   // -----------------------------------------
 
-  _print_info("The sum of multipling matrix", );
+  std::cout << _control_character("32;1m") "The sum of multipling matrix"
+            << _control_character("0;35m") << std::endl;
   n.print();
 
-  _print_info("and", );
+  std::cout << _control_character("32;1m") "and" //
+            << _control_character("0;35m") << std::endl;
   m.print();
 
-  _print_info("is", );
+  std::cout << _control_character("32;1m") "is" //
+            << _control_character("0;35m") << std::endl;
   n.multiply(m).print();
 
   return 0;

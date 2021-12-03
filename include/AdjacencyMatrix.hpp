@@ -40,8 +40,9 @@ public:
   int get_vertices_number() { return this->vertices_number; }
 
   void print_vertices_number() {
-    _print_info("The number of vertices:", "-n");
-    std::cout << this->vertices_number << std::endl;
+    std::cout << _control_character("32;1m") "The number of vertices: "
+              << _control_character("0;35m") << this->vertices_number
+              << std::endl;
   }
   //----------------- vertices number ----------------------------//
 
@@ -49,8 +50,9 @@ public:
   int edges_number() { return this->get_size(); }
 
   void print_edges_number() {
-    _print_info("The number of edges:", "-n");
-    std::cout << this->edges_number() << std::endl;
+    std::cout << _control_character("32;1m") "The number of edges: "
+              << _control_character("0;35m") << this->edges_number()
+              << std::endl;
   }
   //-------------------- edges number ----------------------------//
 
@@ -58,7 +60,8 @@ public:
   bool add_vertex(char vertex) {
     for (auto v : this->vertices)
       if (v == vertex) {
-        _print_warning("Warning for existing vertex!");
+        std::cout << _control_character("31;1m") << __PRETTY_FUNCTION__
+                  << ": Warning for existing vertex!" << std::endl;
         return false;
       }
     this->vertices += vertex;
@@ -99,7 +102,8 @@ public:
   //-------------------------- edge ------------------------------//
 
   void print_matrix() {
-    _print_info("Now print this adjacency matrix:", );
+    std::cout << _control_character("32;1m") "Now print this adjacency matrix:"
+              << _control_character("0;35m") << std::endl;
     for (int i = 0, k = 0; i < this->get_vertices_number(); ++i) {
       std::cout << vertices[i];
       for (int j = 0; j < this->get_vertices_number(); ++j)
