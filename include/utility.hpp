@@ -56,13 +56,13 @@
 #undef _print_info
 #define _print_info(msg, ...)                                                  \
   std::system(std::string("echo\t" + _control_character("32;1m") + msg +       \
-                          _control_character("0;35m") + '\t')                  \
+                          _control_character("0;35m"))                         \
                   .c_str())
 
 #undef _print_warning
 #define _print_warning(msg)                                                    \
-  std::system(std::string("echo\t" + _control_character("31;1m") +             \
-                          __PRETTY_FUNCTION__ + ":\t" + msg +                  \
+  std::system(std::string("echo\t\"" + _control_character("31;1m") +           \
+                          __PRETTY_FUNCTION__ + "\":\t" + msg +                \
                           _control_character("0;35m") + '\a')                  \
                   .c_str())
 
