@@ -19,14 +19,14 @@
 #include "SequenceList.hpp"
 
 template <typename data_type> //
-struct elem_type {
+struct elem_type_of_compressed_matrix {
   int line, culomn;
   data_type data;
 };
 
 template <typename data_type, int max_line_number, int max_culomn_number>
 class compressed_matrix
-    : public sequence_list<elem_type<data_type>,
+    : public sequence_list<elem_type_of_compressed_matrix<data_type>,
                            max_line_number * max_culomn_number> {
 protected:
   struct c_array {
@@ -82,12 +82,24 @@ public:
         if (line == this->list[i].line and culomn == this->list[i].culomn)
           this->erase(i);
 
-        this->insert(i, elem_type<data_type>{line, culomn, data});
+        this->insert(i, //
+                     elem_type_of_compressed_matrix<data_type>{
+                         line,   //
+                         culomn, //
+                         data    //
+                     }           //
+        );
         return true;
       }
 
     // If not positions ge (x, y), add last.
-    this->insert(this->size, elem_type<data_type>{line, culomn, data});
+    this->insert(this->size, //
+                 elem_type_of_compressed_matrix<data_type>{
+                     line,   //
+                     culomn, //
+                     data    //
+                 }           //
+    );
     return true;
   }
 
