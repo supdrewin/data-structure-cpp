@@ -4,7 +4,10 @@ all:
 lib:
 	$(PWD)/build.sh $(PWD) $@ CROSS=$(CROSS)
 
+test:
+	$(PWD)/test.sh $(CROSS)
+
 clean:
 	rm -rf $(PWD)/build
 
-.PHONY: lib clean
+.PHONY: lib test clean
