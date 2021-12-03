@@ -4,9 +4,13 @@ export LANG=en_US.UTF-8 OWNER=Supdrewin
 
 clear
 
-[[ $2 = lib ]] && make -C src PREFIX="$1" "$3" && exit
+[[ $2 = lib ]] &&
+	make -C src PREFIX="$1" "$3" &&
+	exit
 
-echo -e "\e[33;1m$(date) - Making ${PWD##*/} by $OWNER...\e[0;36m"
+echo -ne '\e[33;1m'
+echo "$(date)" - Making "${PWD##*/}" by $OWNER...
+echo -ne '\e[0;36m'
 
 while read -rd '' dir; do
 	make -C "$dir" PREFIX="$1" "$2" "$3"
