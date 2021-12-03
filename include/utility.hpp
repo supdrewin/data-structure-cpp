@@ -59,7 +59,7 @@
 #define _clear_screen std::system("clear")
 
 #undef _control_character
-#define _control_character(code) std::string("\e[") + code
+#define _control_character(code) std::string("\033[") + code
 
 #endif // _WIN32
 
