@@ -13,7 +13,9 @@ TARGET    = x86_64-w64-mingw32
 PLATFORM  = windows
 CXX       = $(TARGET)-g++
 else
+ifneq ($(GCC), 1)
 CXXFLAGS += -stdlib=libc++
+endif
 endif
 
 OUTPUT    = $(PREFIX)/lib/$(PLATFORM)/lib$(PROJECT).a

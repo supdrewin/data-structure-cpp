@@ -15,8 +15,15 @@ Native build on Linux host
 1. Compile pre-request:
 
    ```shell
+   $ make lib GCC=1
+   ```
+
+   or with `libc++`:
+
+   ```shell
    $ make lib
    ```
+
 2. Compile all sub-project:
 
    ```shell

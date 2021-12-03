@@ -5,6 +5,8 @@ EXEC     ?= app
 
 CXXFLAGS += -std=c++2a -pipe -I$(PREFIX)/include
 CXXFLAGS += -Wall -g -O2 -finline-functions
+
+LDFLAGS  ?= -flto
 LDFLAGS  += -L$(PREFIX)/lib/$(PLATFORM) -static -lutility
 
 INPUT     = || :
