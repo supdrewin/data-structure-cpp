@@ -29,44 +29,33 @@ public:
   sequence_list() = default;
   virtual ~sequence_list() {}
 
-  int get_size() { return this->size; }
+  inline int get_size() { return this->size; }
 
-  bool insert(int i, elem_type x) {
+  bool insert(int index, elem_type push) {
     if (this->size >= max_size)
-      std::cerr << __PRETTY_FUNCTION__     //
-                << ": Too full to insert!" //
-                << std::endl;
-    else if (i < 0 or i > this->size)
-      std::cerr << __PRETTY_FUNCTION__        //
-                << ": Invailed argument `i'!" //
-                << std::endl;
+      std::cerr << __PRETTY_FUNCTION__ << ": Too full to insert!" << std::endl;
+    else if (index < 0 or index > this->size)
+      std::cerr << __PRETTY_FUNCTION__ << ": Invailed argument!" << std::endl;
     else {
-      for (int j = this->size; j > i; --j)
-        this->list[j] = this->list[j - 1];
-
-      this->list[i] = x;
+      for (int i = this->size; i > index; --i)
+        this->list[i] = this->list[i - 1];
+      this->list[index] = push;
       this->size++;
       return true;
     }
     return false;
   }
 
-  bool erase(int i, elem_type *x = nullptr) {
+  bool erase(int index, elem_type *pop = nullptr) {
     if (this->size <= 0)
-      std::cerr << __PRETTY_FUNCTION__ //
-                << ": Nothing to do!"  //
-                << std::endl;
-    else if (i < 0 or i > this->size - 1)
-      std::cerr << __PRETTY_FUNCTION__        //
-                << ": Invailed argument `i'!" //
-                << std::endl;
+      std::cerr << __PRETTY_FUNCTION__ << ": Nothing to do!" << std::endl;
+    else if (index < 0 or index > this->size - 1)
+      std::cerr << __PRETTY_FUNCTION__ << ": Invailed argument!" << std::endl;
     else {
-      if (x != nullptr)
-        *x = this->list[i];
-
-      for (int j = i + 1; j <= this->size - 1; ++j)
-        this->list[j - 1] = this->list[j];
-
+      if (pop != nullptr)
+        *pop = this->list[index];
+      for (int i = index; i <= this->size - 1; ++i)
+        this->list[i] = this->list[i + 1];
       this->size--;
       return true;
     }
@@ -75,5 +64,4 @@ public:
 };
 
 #endif // not defined(__sequence_list_hpp)
-
 // vim:set nu rnu cuc cul ts=2 sw=2 et si:
