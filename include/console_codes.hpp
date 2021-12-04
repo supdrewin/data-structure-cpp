@@ -53,9 +53,6 @@
 // is ignored
 #define DEL '\x7f'
 
-// is equivalent to ESC [
-#define CSI '\x9b'
-
 // ESC- but not CSI-sequences
 
 // Reset.
@@ -85,7 +82,7 @@
 #define DECRD "\x1b\x38"
 
 // Control sequence introducer
-// #define CSI '\x1b\x5b'
+#define CSI "\x1b\x5b"
 
 // DEC screen alignment test - fill screen with E's.
 #define DECALN "\x1b\x23\x38"
@@ -101,50 +98,41 @@
 
 // ECMA-48 Set Graphics Rendition
 
-#define SGR_RESET_ALL "\x9b\x30"
-#define SGR_BOLD "\x9b\x31"
-#define SGR_HALF_BRIGHT "\x9b\x32"
-#define SGR_UNDERSCORE "\x9b\x34"
-#define SGR_BLINK_ON "\x9b\x35"
-#define SGR_REVERSE_VIDEO_ON "\x9b\x37"
-#define SGR_RESET_SELECTED "\x9b\x31\x30"
+#define SGR_RESET_ALL "\x1b\x5b\x30\x6d"
+#define SGR_BOLD "\x1b\x5b\x31\x6d"
+#define SGR_HALF_BRIGHT "\x1b\x5b\x32\x6d"
+#define SGR_UNDERSCORE "\x1b\x5b\x34\x6d"
+#define SGR_BLINK_ON "\x1b\x5b\x35\x6d"
+#define SGR_REVERSE_VIDEO_ON "\x1b\x5b\x37\x6d"
+#define SGR_RESET_SELECTED "\x1b\x5b\x31\x30\x6d"
 
 // TODO: Complete it!
 
-#define SGR_UNDERLINE_ON "\x9b\x32\x31"
-#define SGR_NORMAL_INTENSITY "\x9b\x32\x32"
-#define SGR_UNDERLINE_OFF "\x9b\x32\x34"
-#define SGR_BLINK_OFF "\x9b\x32\x35"
-#define SGR_REVERSE_VIDEO_OFF "\x9b\x32\x37"
+#define SGR_UNDERLINE_ON "\x1b\x5b\x32\x31\x6d"
+#define SGR_NORMAL_INTENSITY "\x1b\x5b\x32\x32\x6d"
+#define SGR_UNDERLINE_OFF "\x1b\x5b\x32\x34\x6d"
+#define SGR_BLINK_OFF "\x1b\x5b\x32\x35\x6d"
+#define SGR_REVERSE_VIDEO_OFF "\x1b\x5b\x32\x37\x6d"
 
-#define SGR_BLACK_FOREGROUND "\x9b\x33\x30"
-#define SGR_RED_FOREGROUND "\x9b\x33\x31"
-#define SGR_GREEN_FOREGROUND "\x9b\x33\x32"
-#define SGR_BROWN_FOREGROUND "\x9b\x33\x33"
-#define SGR_BLUE_FOREGROUND "\x9b\x33\x34"
-#define SGR_MAGENTA_FOREGROUND "\x9b\x33\x35"
-#define SGR_CYAN_FOREGROUND "\x9b\x33\x36"
-#define SGR_WHITE_FOREGROUND "\x9b\x33\x37"
+#define SGR_BLACK_FOREGROUND "\x1b\x5b\x33\x30\x6d"
+#define SGR_RED_FOREGROUND "\x1b\x5b\x33\x31\x6d"
+#define SGR_GREEN_FOREGROUND "\x1b\x5b\x33\x32\x6d"
+#define SGR_BROWN_FOREGROUND "\x1b\x5b\x33\x33\x6d"
+#define SGR_BLUE_FOREGROUND "\x1b\x5b\x33\x34\x6d"
+#define SGR_MAGENTA_FOREGROUND "\x1b\x5b\x33\x35\x6d"
+#define SGR_CYAN_FOREGROUND "\x1b\x5b\x33\x36\x6d"
+#define SGR_WHITE_FOREGROUND "\x1b\x5b\x33\x37\x6d"
 
 // TODO: Complete it!
 
-#define SGR_BLACK_BACKGROUND "\x9b\x34\x30"
-#define SGR_RED_BACKGROUND "\x9b\x34\x31"
-#define SGR_GREEN_BACKGROUND "\x9b\x34\x32"
-#define SGR_BROWN_BACKGROUND "\x9b\x34\x33"
-#define SGR_BLUE_BACKGROUND "\x9b\x34\x34"
-#define SGR_MAGENTA_BACKGROUND "\x9b\x34\x35"
-#define SGR_CYAN_BACKGROUND "\x9b\x34\x36"
-#define SGR_WHITE_BACKGROUND "\x9b\x34\x37"
-
-#define SGR_BRIGHT_BLACK_FOREGROUND "\x9b\x39\x30"
-#define SGR_BRIGHT_RED_FOREGROUND "\x9b\x39\x31"
-#define SGR_BRIGHT_GREEN_FOREGROUND "\x9b\x39\x32"
-#define SGR_BRIGHT_BROWN_FOREGROUND "\x9b\x39\x33"
-#define SGR_BRIGHT_BLUE_FOREGROUND "\x9b\x39\x34"
-#define SGR_BRIGHT_MAGENTA_FOREGROUND "\x9b\x39\x35"
-#define SGR_BRIGHT_CYAN_FOREGROUND "\x9b\x39\x36"
-#define SGR_BRIGHT_WHITE_FOREGROUND "\x9b\x39\x37"
+#define SGR_BLACK_BACKGROUND "\x1b\x5b\x34\x30\x6d"
+#define SGR_RED_BACKGROUND "\x1b\x5b\x34\x31\x6d"
+#define SGR_GREEN_BACKGROUND "\x1b\x5b\x34\x32\x6d"
+#define SGR_BROWN_BACKGROUND "\x1b\x5b\x34\x33\x6d"
+#define SGR_BLUE_BACKGROUND "\x1b\x5b\x34\x34\x6d"
+#define SGR_MAGENTA_BACKGROUND "\x1b\x5b\x34\x35\x6d"
+#define SGR_CYAN_BACKGROUND "\x1b\x5b\x34\x36\x6d"
+#define SGR_WHITE_BACKGROUND "\x1b\x5b\x34\x37\x6d"
 
 // ECMA-48 Mode Switches
 // TODO: Complete it!

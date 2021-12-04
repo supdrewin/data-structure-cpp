@@ -37,32 +37,34 @@ int main() {
 
   // -----------------------------------------
 
-  std::cout << _control_character("32;1m") "The sum of multipling matrix"
-            << _control_character("0;35m") << std::endl;
+  std::cout << SGR_BOLD << SGR_GREEN_FOREGROUND
+            << "The sum of multipling matrix" //
+            << SGR_RESET_ALL << SGR_MAGENTA_FOREGROUND << std::endl;
   m.print();
 
-  std::cout << _control_character("32;1m") "and" //
-            << _control_character("0;35m") << std::endl;
+  std::cout << SGR_BOLD << SGR_GREEN_FOREGROUND << "and" //
+            << SGR_RESET_ALL << SGR_MAGENTA_FOREGROUND << std::endl;
   n.print();
 
-  std::cout << _control_character("32;1m") "is" //
-            << _control_character("0;35m") << std::endl;
+  std::cout << SGR_BOLD << SGR_GREEN_FOREGROUND << "is" //
+            << SGR_RESET_ALL << SGR_MAGENTA_FOREGROUND << std::endl;
   (m * n).print();
 
   std::cout << std::endl;
 
   // -----------------------------------------
 
-  std::cout << _control_character("32;1m") "The sum of multipling matrix"
-            << _control_character("0;35m") << std::endl;
+  std::cout << SGR_BOLD << SGR_GREEN_FOREGROUND
+            << "The sum of multipling matrix" //
+            << SGR_RESET_ALL << SGR_MAGENTA_FOREGROUND << std::endl;
   n.print();
 
-  std::cout << _control_character("32;1m") "and" //
-            << _control_character("0;35m") << std::endl;
+  std::cout << SGR_BOLD << SGR_GREEN_FOREGROUND << "and" //
+            << SGR_RESET_ALL << SGR_MAGENTA_FOREGROUND << std::endl;
   m.print();
 
-  std::cout << _control_character("32;1m") "is" //
-            << _control_character("0;35m") << std::endl;
+  std::cout << SGR_BOLD << SGR_GREEN_FOREGROUND << "is" //
+            << SGR_RESET_ALL << SGR_MAGENTA_FOREGROUND << std::endl;
   (n * m).print();
 
   return 0;

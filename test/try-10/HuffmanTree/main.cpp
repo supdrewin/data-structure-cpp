@@ -24,16 +24,16 @@ int main() {
   huffman_tree<double, __sizeof(freq)> ht(freq, letters);
 
   // print the tree
-  std::cout << _control_character("32;1m") "Print the huffman tree:"
-            << _control_character("0;35m") << std::endl;
+  std::cout << SGR_BOLD << SGR_GREEN_FOREGROUND << "Print the huffman tree:" //
+            << SGR_RESET_ALL << SGR_MAGENTA_FOREGROUND << std::endl;
   ht.print();
 
   // generate code list
   ht.code_list_config();
 
   // print the list
-  std::cout << _control_character("32;1m") "Print the code list:"
-            << _control_character("0;35m") << std::endl;
+  std::cout << SGR_BOLD << SGR_GREEN_FOREGROUND << "Print the code list:" //
+            << SGR_RESET_ALL << SGR_MAGENTA_FOREGROUND << std::endl;
   ht.code_list_print();
 
   return 0;
