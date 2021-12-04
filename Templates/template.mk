@@ -4,7 +4,7 @@ PLATFORM ?= posix
 EXEC     ?= app
 
 CXXFLAGS += -std=c++2a -pipe -I$(PREFIX)/include
-CXXFLAGS += -Wall -Weffc++ -Wextra -Wsign-conversion
+CXXFLAGS += -Wall -Weffc++ -Wextra -Wsign-conversion -Werror
 CXXFLAGS += -pedantic-errors -g -O2 -finline-functions
 
 LDFLAGS  ?= -flto

@@ -28,9 +28,10 @@ void convert(int decimal, int scale) {
   }
 
   // Converting integer to C-style string.
-  for (int tmp; decimal; decimal /= scale)
-    //! Danger: don't reverse left tmp and right tmp!
-    stack.push(((tmp = decimal % scale) < 10 ? 48 : 87) + tmp);
+  for (int TMP, tmp; decimal; decimal /= scale) {
+    TMP = ((tmp = decimal % scale) < 10 ? 48 : 87);
+    stack.push(TMP + tmp);
+  }
 
   std::cout << sign;
 
