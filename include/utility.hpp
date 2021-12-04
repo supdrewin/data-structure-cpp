@@ -50,18 +50,15 @@
 #undef _clear_screen
 #define _clear_screen std::system("cls")
 
-#undef _control_character
-#define _control_character(code) std::string("[") + code
-
 #else
 
 #undef _clear_screen
 #define _clear_screen std::system("clear")
 
+#endif // _WIN32
+
 #undef _control_character
 #define _control_character(code) std::string("\033[") + code
-
-#endif // _WIN32
 
 #undef _assert_fail
 void _assert_fail(std::string assertion, std::string file, unsigned int line,
