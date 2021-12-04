@@ -16,14 +16,14 @@
 #ifndef __binary_tree_hpp
 #define __binary_tree_hpp 1
 
-template <typename _data> //
+template <typename data_type> //
 class binary_tree {
 protected:
   struct node {
-    _data data;
+    data_type data;
     node *left, *right;
     node() : left(nullptr), right(nullptr) {}
-    node(_data d, node *l = nullptr, node *r = nullptr)
+    node(data_type d, node *l = nullptr, node *r = nullptr)
         : data(d), left(l), right(r) {}
     ~node() {}
   } * root;
@@ -32,15 +32,18 @@ public:
   binary_tree() : root(nullptr) { this->create(); };
   ~binary_tree() { this->destroy(); }
 
-  inline bool empty() { return this->root ? false : true; }
+  inline bool empty() { return (this->root == nullptr ? true : false); }
 
   // TODO:...
 
-  int create() { create(this->root); }
-  int create(node *n) {}
+  int create() {
+    // create(this->root);
+    return false;
+  }
+  // int create(node *n) {}
 
-  int destroy() { return this->root ? destroy(this->root) : false; }
-  int destroy(node *n) { return n ? destroy(n) : false; }
+  int destroy() { return (this->root == nullptr ? 0 : destroy(this->root)); }
+  int destroy(node *n) { return (n == nullptr ? 0 : destroy(n)); }
 };
 
 #endif // !__binary_tree_hpp
