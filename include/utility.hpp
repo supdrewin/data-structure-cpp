@@ -15,7 +15,7 @@
 #ifndef __utility_hpp
 #define __utility_hpp 1
 
-#include "console_codes.hpp"
+#include "console.hpp"
 
 #undef __main
 #define __main(...) main(int argc, char **argv)
@@ -46,18 +46,6 @@
 
 #ifdef __cplusplus
 #include <iostream>
-
-#ifdef _WIN32
-
-#undef _clear_screen
-#define _clear_screen std::system("cls")
-
-#else
-
-#undef _clear_screen
-#define _clear_screen std::system("clear")
-
-#endif // _WIN32
 
 #undef _assert_fail
 void _assert_fail(std::string assertion, std::string file, unsigned int line,

@@ -31,7 +31,7 @@ public:
   ~sequencelist() {}
 
   void init(int n) {
-    _clear_screen;
+    std::cout << RIS;
 
     n > 0 ? void(0) : std::exit(EXIT_FAILURE);
     auto tmp = new patient[static_cast<unsigned>(n)];
@@ -62,7 +62,7 @@ public:
 
       this->insert(i, tmp[i]);
 
-      _clear_screen;
+      std::cout << RIS;
     }
 
     delete[] tmp;

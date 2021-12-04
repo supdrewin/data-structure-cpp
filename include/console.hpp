@@ -1,4 +1,4 @@
-/** console_codes.hpp -*- C++ -*- Copyright (C) 2021 Supdrewin
+/** console.hpp -*- C++ -*- Copyright (C) 2021 Supdrewin
  * This file is part of the Data Structure Cpp Project.
  * This Cpp project is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by the
@@ -12,8 +12,8 @@
  * with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef __console_codes_hpp
-#define __console_codes_hpp 1
+#ifndef __console_hpp
+#define __console_hpp 1
 
 // Control characters
 
@@ -137,4 +137,4 @@
 // ECMA-48 Mode Switches
 // TODO: Complete it!
 
-#endif // !__console_codes_hpp
+#endif // !__console_hpp
