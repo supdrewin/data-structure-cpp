@@ -16,12 +16,12 @@
 #include "SequenceList.hpp"
 
 struct people {
-  std::string name, sex;
+  std::string name{}, sex{};
   int age = 0;
 };
 
 struct patient : people {
-  std::string number, symptom;
+  std::string number{}, symptom{};
 };
 
 // Define a sequence list of patients with 100 maxsize.

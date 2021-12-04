@@ -24,19 +24,22 @@ template <int max_vertex_number>
 class adjacency_matrix
     : public compressed_matrix<int, max_vertex_number, max_vertex_number> {
 protected:
-  std::string vertices;
-  int vertices_number;
+  std::string vertices{};
+  int vertices_number{0};
 
 public:
-  adjacency_matrix() : vertices(), vertices_number(0) {}
+  adjacency_matrix() = default;
+
   adjacency_matrix(std::string vertices) {
     this->vertices = vertices;
     this->set_vertices_number();
   }
+
   virtual ~adjacency_matrix() {}
 
   //----------------- vertices number ----------------------------//
   void set_vertices_number() { this->vertices_number = this->vertices.size(); }
+
   int get_vertices_number() { return this->vertices_number; }
 
   void print_vertices_number() {
@@ -77,6 +80,7 @@ public:
     this->set_vertices_number();
     this->trim_edges_of_vertex(index);
   }
+
   void delete_vertex(char vertex) {
     this->delete_vertex(this->vertices.find_first_of(vertex));
   }
@@ -88,6 +92,7 @@ public:
   }
 
   bool delete_edge(int index) { return this->erase(index); }
+
   bool delete_edge(int head, int end) { return this->pos_erase(head, end); }
 
   void trim_edges_of_vertex(int vertex) {
@@ -104,6 +109,7 @@ public:
   }
   //-------------------------- edge ------------------------------//
 
+  //--------------------------- print ----------------------------//
   void print_matrix() {
     std::cout << SGR_BOLD << SGR_GREEN_FOREGROUND
               << "Now print this adjacency matrix:" //
@@ -119,11 +125,13 @@ public:
       std::cout << std::endl;
     }
   }
+
   void print() {
     this->print_vertices_number();
     this->print_edges_number();
     this->print_matrix();
   }
+  //--------------------------- print ----------------------------//
 };
 
 #endif // !__adjacency_matrix_hpp

@@ -22,7 +22,7 @@ template <typename elem_type, int max_size> //
 class sequence_queue {
 protected:
   // Var `count' should le `MaxSize'.
-  elem_type queue[max_size];
+  elem_type queue[unsigned(max_size)];
   int count = 0, front = 0;
 
 public:

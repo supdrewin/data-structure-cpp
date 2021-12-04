@@ -30,7 +30,8 @@ class compressed_matrix
                            max_line_number * max_culomn_number> {
 protected:
   struct c_array {
-    data_type data[max_line_number][max_culomn_number];
+    data_type data[static_cast<unsigned>(max_line_number)]
+                  [static_cast<unsigned>(max_culomn_number)];
     // Constructor to init array.
     c_array() {
       for (int i = 0; i < max_line_number; ++i)

@@ -21,8 +21,8 @@
 template <typename elem_type, int max_size> //
 class SequenceStack {
 protected:
-  elem_type stack[max_size];
-  int size = 0;
+  elem_type stack[unsigned(max_size)];
+  int size{0};
 
 public:
   int empty() {

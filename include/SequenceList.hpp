@@ -21,9 +21,9 @@
 template <typename elem_type, int max_size> //
 class sequence_list {
 protected:
-  elem_type list[max_size]; // store list member to here
-  int size = 0;             // the size of sequence list,
-                            // default to 0(empty)
+  elem_type list[unsigned(max_size)]; // store list member to here
+  int size{0};                        // the size of sequence list,
+                                      // default to 0(empty)
 
 public:
   sequence_list() = default;

@@ -31,17 +31,19 @@ protected:
     int left_child, right_child, parent;
     weight_type weight, max_weight;
 
-    std::string code;
+    std::string code{};
 
     // all parents and children are init as invaild
-    huffman_tree_node() : left_child(-1), right_child(-1), parent(-1) {}
+    huffman_tree_node()
+        : left_child{-1}, right_child{-1}, parent{-1}, //
+          weight{0}, max_weight{0} {}
     ~huffman_tree_node() {}
-  } node[root + 1];
+  } node[unsigned(root + 1)];
   // actual buffman tree
 
   struct code_node {
-    char mark;
-    std::string code;
+    char mark{};
+    std::string code{};
 
     // print list node
     void print() {
@@ -52,17 +54,16 @@ protected:
 
     code_node() = default;
     ~code_node() {}
-  } code_list[node_count];
+  } code_list[unsigned(node_count)];
 
   // index of code list
-  int *code_index;
+  int code_index[unsigned(node_count)];
 
 public:
   huffman_tree() = default;
 
   // constructor using weight array
-  huffman_tree(weight_type *weight, std::string mark)
-      : code_index(new int[node_count]()) {
+  huffman_tree(weight_type *weight, std::string mark) {
     // get the max weight
     for (int i = 0; i < node_count; ++i)
       this->node->max_weight = __max(this->node->max_weight, weight[i]);
@@ -132,7 +133,7 @@ public:
   }
 
   // do nothing here
-  virtual ~huffman_tree() { delete[] this->code_index; }
+  virtual ~huffman_tree() {}
 
   // method to get the max weight
   weight_type max_weight() { return this->node->max_weight; }
