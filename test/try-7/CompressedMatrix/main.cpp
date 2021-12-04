@@ -47,7 +47,7 @@ int main() {
 
   std::cout << _control_character("32;1m") "is" //
             << _control_character("0;35m") << std::endl;
-  m.multiply(n).print();
+  (m * n).print();
 
   std::cout << std::endl;
 
@@ -63,7 +63,7 @@ int main() {
 
   std::cout << _control_character("32;1m") "is" //
             << _control_character("0;35m") << std::endl;
-  n.multiply(m).print();
+  (n * m).print();
 
   return 0;
 }

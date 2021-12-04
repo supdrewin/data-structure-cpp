@@ -158,7 +158,7 @@ public:
    *  @return tmp <CompressedMatrix> matrix obj after multipling
    *  @param matrix <CompressedMatrix> a matrix to be multiplied
    */
-  compressed_matrix<data_type, max_line_number, max_line_number> multiply(
+  compressed_matrix<data_type, max_line_number, max_line_number> operator*(
       compressed_matrix<data_type, max_culomn_number, max_line_number> matrix) {
     compressed_matrix<data_type, max_line_number, max_line_number> tmp;
     c_array a = this->c_arr(), b = matrix.tranpose().c_arr();
