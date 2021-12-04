@@ -15,44 +15,37 @@
 
 #include "SequenceStack.hpp"
 
-int check(std::string exp) {
+bool check(std::string expr) {
   SequenceStack<char, 100> stack;
 
-  for (int i = 0; exp[i]; i++)
-    if (exp[i] == '[' or // push `[' and `(' into stack
-        exp[i] == '(')
-      stack.push(exp[i]);
-    else if (exp[i] == ']') // important for check `[]'
+  for (size_t i = 0; expr[i]; i++)
+    if (expr[i] == '[' or // push `[' and `(' into stack
+        expr[i] == '(')
+      stack.push(expr[i]);
+    else if (expr[i] == ']') // important for check `[]'
       if (stack.top() != '[')
         return false;
       else
         stack.pop();
-    else if (exp[i] == ')') // important for check `()'
+    else if (expr[i] == ')') // important for check `()'
       if (stack.top() != '(')
         return false;
       else
         stack.pop();
-    else
+    else // close condition
       continue;
 
-  if (stack.empty())
-    return true;
-  return false;
+  return (stack.empty() ? true : false);
 }
 
-int main() {
+int __main() {
   __assert(argc == 2); // I'm actually NOT interactive.
-
   std::string expr(argv[1]);
 
   if (check(expr))
-    std::cout << "Expression `" //
-              << expr           //
-              << "' is vaild!" << std::endl;
+    std::cout << "Expression `" << expr << "' is vaild!" << std::endl;
   else
-    std::cerr << "Expression `" //
-              << expr           //
-              << "' is invaild!" << std::endl;
+    std::cerr << "Expression `" << expr << "' is invaild!" << std::endl;
 
   return 0;
 }

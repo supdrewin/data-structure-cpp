@@ -70,7 +70,7 @@ public:
   }
 
   void delete_vertex(int index) {
-    this->vertices.erase(index, 1);
+    this->vertices.erase(size_t(index), 1);
     this->set_vertices_number();
     this->trim_edges_of_vertex(index);
   }
@@ -105,7 +105,7 @@ public:
     std::cout << _control_character("32;1m") "Now print this adjacency matrix:"
               << _control_character("0;35m") << std::endl;
     for (int i = 0, k = 0; i < this->get_vertices_number(); ++i) {
-      std::cout << vertices[i];
+      std::cout << vertices[size_t(i)];
       for (int j = 0; j < this->get_vertices_number(); ++j)
         std::cout << std::setw(6)
                   << ((this->list[k].line == i and //

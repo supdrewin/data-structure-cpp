@@ -39,8 +39,8 @@ void triangle(int n) {
   }
 }
 
-int main() {
-  __assert(argc == 2 and std::atoi(argv[1]) > 0);
-  triangle(std::atoi(argv[1]));
+int __main() {
+  __assert(argc == 2 and atoi(argv[1]) > 0);
+  triangle(atoi(argv[1]));
   return 0;
 }

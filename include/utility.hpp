@@ -15,8 +15,8 @@
 #ifndef __utility_hpp
 #define __utility_hpp 1
 
-#undef main
-#define main(...) main(int argc, char **argv)
+#undef __main
+#define __main(...) main(int argc, char **argv)
 
 #undef _program_name
 #define _program_name argv[0]

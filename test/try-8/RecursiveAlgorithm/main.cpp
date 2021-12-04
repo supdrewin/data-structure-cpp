@@ -15,7 +15,7 @@
 
 #include "utility.hpp"
 
-int add(int n) { return n ? n += add(n - 1) : n; }
+int add(int n) { return n ? n += add(n - 1) : 0; }
 
 int find(int data[], int d, int min, int max) {
   if (d > data[(min + max) / 2])
@@ -27,44 +27,33 @@ int find(int data[], int d, int min, int max) {
 
 int factor(int n, int *sum) {
   for (int i = 2; i <= n / 2; ++i)
-    n % i ?: factor(i, sum);
+    n % i ? 0 : factor(i, sum);
   return ++*sum;
 }
 
-int main() {
+int __main() {
   int *data, n = 0;
 
-  __assert(argc == 2 //
-               ? n = std::atoi(argv[1])
-               : n);
-  data = new int[n];
+  __assert(static_cast<bool>(argc == 2)
+               ? (static_cast<bool>((n = atoi(argv[1])) > 0) ? true : false)
+               : false);
+  //! Danger here: convert signed int to unsigned!
+  data = new int[static_cast<unsigned>(n)];
 
   for (int i = 0; i < n; ++i)
     data[i] = i * i;
 
   for (int i = 0; i < n; ++i)
-    std::cout << "Add 1 to "                         //
-              << i + 1                               //
-              << " equals "                          //
-              << add(i + 1)                          //
-              << '.'                                 //
-              << std::endl;                          //
-                                                     //
-  for (int i = 0; i < n; ++i)                        //
-    std::cout << "Data ["                            //
-              << find(data, data[i], 0, n)           //
-              << "] is "                             //
-              << data[i]                             //
-              << '.'                                 //
-              << std::endl;                          //
-                                                     //
-  for (int i = 0, sum; i < n; ++i)                   //
-    std::cout << "The number of factorizations for " //
-              << i + 1                               //
-              << " is "                              //
-              << factor(i + 1, &(sum = 0))           //
-              << '.'                                 //
+    std::cout << "Add 1 to " << i + 1 << " equals " << add(i + 1) << '.'
               << std::endl;
+
+  for (int i = 0; i < n; ++i)
+    std::cout << "Data [" << find(data, data[i], 0, n) << "] is " << data[i]
+              << '.' << std::endl;
+
+  for (int i = 0, sum; i < n; ++i)
+    std::cout << "The number of factorizations for " << i + 1 << " is "
+              << factor(i + 1, &(sum = 0)) << '.' << std::endl;
 
   delete[] data;
   return 0;

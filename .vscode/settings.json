@@ -3,6 +3,10 @@
         "-std=c++2a",
         "-I${workspaceFolder}/include",
         "-Wall",
+        "-Weffc++",
+        "-Wextra",
+        "-Wsign-conversion",
+        "-pedantic-errors",
         "-stdlib=libc++",
         "-fuse-ld=lld"
     ],

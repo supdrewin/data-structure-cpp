@@ -33,35 +33,39 @@ public:
   void init(int n) {
     _clear_screen;
 
-    patient s[n];
+    n > 0 ? void(0) : std::exit(EXIT_FAILURE);
+    auto tmp = new patient[static_cast<unsigned>(n)];
+
     for (int i = 0; i < n; i++) {
       std::cout << "------Please insert the " << i + 1
                 << "th patient's information" << std::endl;
 
       std::cout << "Please insert the " << i + 1 //
                 << "th patient's number: ";
-      std::cin >> s[i].number;
+      std::cin >> tmp[i].number;
 
       std::cout << "Please insert the " << i + 1 //
                 << "th patient's name: ";
-      std::cin >> s[i].name;
+      std::cin >> tmp[i].name;
 
       std::cout << "Please insert the " << i + 1 //
                 << "th patient's age: ";
-      std::cin >> s[i].age;
+      std::cin >> tmp[i].age;
 
       std::cout << "Please insert the " << i + 1 //
                 << "th patient's sex: ";
-      std::cin >> s[i].sex;
+      std::cin >> tmp[i].sex;
 
       std::cout << "Please insert the " << i + 1 //
                 << "th patient's symptom: ";
-      std::cin >> s[i].symptom;
+      std::cin >> tmp[i].symptom;
 
-      this->insert(i, s[i]);
+      this->insert(i, tmp[i]);
 
       _clear_screen;
     }
+
+    delete[] tmp;
   }
 
   int get(int i) {

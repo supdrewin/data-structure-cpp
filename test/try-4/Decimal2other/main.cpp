@@ -29,10 +29,8 @@ void convert(int decimal, int scale) {
 
   // Converting integer to C-style string.
   for (int tmp; decimal; decimal /= scale)
-    stack.push(((tmp = decimal % scale) < 10 //
-                    ? 48
-                    : 87) +
-               tmp);
+    //! Danger: don't reverse left tmp and right tmp!
+    stack.push(((tmp = decimal % scale) < 10 ? 48 : 87) + tmp);
 
   std::cout << sign;
 
@@ -41,7 +39,7 @@ void convert(int decimal, int scale) {
   std::cout << std::endl;
 }
 
-int main() {
+int __main() {
   if (argc == 3)
     convert(std::atoi(argv[1]), std::atoi(argv[2]));
   else // OK, now show user-friendly tips.
