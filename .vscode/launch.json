@@ -6,7 +6,9 @@
       "request": "launch",
       "name": "Debug",
       "program": "${workspaceFolder}/build/${input:project}.app",
-      "args": [],
+      "args": [
+        "${input:test}"
+      ],
       "cwd": "${workspaceFolder}"
     }
   ],
@@ -14,7 +16,13 @@
     {
       "type": "promptString",
       "id": "project",
-      "description": "Enter the name of the program you want to run here.",
+      "description": "Enter a program name you want to run here.",
+      "default": "${relativeFileDirname}"
+    },
+    {
+      "type": "promptString",
+      "id": "test",
+      "description": "Pass arguments to launch the program here.",
       "default": "${relativeFileDirname}"
     }
   ]
