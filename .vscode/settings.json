@@ -47,6 +47,5 @@
                 "default": "${relativeFileDirname}"
             }
         ]
-    },
-    "lldb.launch.terminal": "integrated"
+    }
 }
