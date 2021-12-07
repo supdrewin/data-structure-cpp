@@ -162,12 +162,13 @@ public:
   compressed_matrix<data_type, max_line_number, max_line_number> operator*(
       compressed_matrix<data_type, max_culomn_number, max_line_number> matrix) {
     compressed_matrix<data_type, max_line_number, max_line_number> tmp;
-    c_array a = this->c_arr(), b = matrix.tranpose().c_arr();
+    auto a = this->c_arr();
+    auto b = matrix.c_arr();
 
     for (int i = 0, sum = 0; i < max_line_number; ++i)
       for (int j = 0; j < max_line_number; ++j, sum = 0) {
         for (int k = 0; k < max_culomn_number; ++k)
-          sum += a.data[i][k] * b.data[j][k];
+          sum += a.data[i][k] * b.data[k][j];
         tmp.add(i, j, sum);
       }
 
