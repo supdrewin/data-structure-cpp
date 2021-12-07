@@ -14,17 +14,39 @@
         "-Wsign-conversion"
     ],
     "editor.bracketPairColorization.enabled": true,
-    "editor.fontFamily": "FiraCode Nerd Font",
-    "editor.fontLigatures": true,
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
     "editor.formatOnType": true,
     "editor.insertSpaces": false,
-    "editor.minimap.scale": 2,
     "editor.mouseWheelZoom": true,
     "editor.semanticHighlighting.enabled": true,
     "editor.tabSize": 2,
     "extensions.ignoreRecommendations": true,
     "files.autoGuessEncoding": true,
-    "files.trimTrailingWhitespace": true
+    "files.trimTrailingWhitespace": true,
+    "launch": {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "type": "lldb",
+                "request": "launch",
+                "name": "Debug",
+                "program": "${workspaceFolder}/build/${input:project}.app",
+                "args": [],
+                "cwd": "${workspaceFolder}",
+                "windows": {
+                    "program": "${workspaceFolder}\\build\\${input:project}.exe"
+                }
+            }
+        ],
+        "inputs": [
+            {
+                "type": "promptString",
+                "id": "project",
+                "description": "Enter a program name you want to run here.",
+                "default": "${relativeFileDirname}"
+            }
+        ]
+    },
+    "lldb.launch.terminal": "integrated"
 }
