@@ -158,6 +158,8 @@ public:
           visited[end] = queue->append(end);
         }
     }
+
+    delete queue;
   }
 
   void breadth_first_search() {
