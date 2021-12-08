@@ -145,22 +145,18 @@ public:
   void breadth_first_search(int index, bool *visited) {
     index < 0 ? std::exit(EXIT_FAILURE) : void(0);
     auto queue = new sequence_queue<int, max_vertex_number>(index);
-    int u, w;
 
     std::cout << this->vertices[unsigned(index)] << '\t';
     visited[index] = true;
 
+    int begin, end{-1};
     while (not queue->empty()) {
-      u = queue->back();
-      w = this->get_next_vertex(u);
-      while (w != -1) {
-        if (not visited[w]) {
-          std::cout << this->vertices[unsigned(w)] << '\t';
-          visited[w] = true;
-          queue->append(w);
+      begin = queue->back();
+      while ((end = this->get_next_vertex(begin, end)) not_eq -1)
+        if (not visited[end]) {
+          std::cout << this->vertices[unsigned(end)] << '\t';
+          visited[end] = queue->append(end);
         }
-        w = this->get_next_vertex(u, w);
-      }
     }
   }
 
