@@ -146,7 +146,7 @@ public:
     index < 0 ? std::exit(EXIT_FAILURE) : void(0);
     auto queue = new sequence_queue<int, max_vertex_number>(index);
 
-    std::cout << this->vertices[unsigned(index)] << '\t';
+    std::cout << this->vertices[unsigned(index)];
     visited[index] = true;
 
     int begin, end{-1};
@@ -154,7 +154,7 @@ public:
       begin = queue->back();
       while ((end = this->get_next_vertex(begin, end)) not_eq -1)
         if (not visited[end]) {
-          std::cout << this->vertices[unsigned(end)] << '\t';
+          std::cout << '\t' << this->vertices[unsigned(end)];
           visited[end] = queue->append(end);
         }
     }
