@@ -62,12 +62,12 @@ public:
 
   /** @brief Add data into position (x, y).
    *  @return <boolean> whether func success or not
-   *  @param x <integer> the location of line
-   *  @param y <integer> the location of column
+   *  @param line <integer> the location of line
+   *  @param culomn <integer> the location of column
    *  @param data <data_type> data adding
    */
   bool add(int line, int culomn, data_type data) {
-    // Check whether position (x, y) is vaild or not.
+    // Check whether position (line, culomn) is vaild or not.
     if (line >= max_line_number or culomn >= max_culomn_number or //
         line < 0 or culomn < 0) {
       std::cerr << __PRETTY_FUNCTION__ << ": Position (" << line << ", "
@@ -75,7 +75,7 @@ public:
       return false;
     }
 
-    // Search first position ge (x, y) from list.
+    // Search first position ge (line, culomn) from list.
     for (int i = 0; i < this->size; ++i)
       if (line < this->list[i].line or
           (line == this->list[i].line and culomn <= this->list[i].culomn)) {
@@ -93,7 +93,7 @@ public:
         return true;
       }
 
-    // If not positions ge (x, y), add last.
+    // If not positions ge (line, culomn), add last.
     this->insert(this->size, //
                  elem_type_of_compressed_matrix<data_type>{
                      line,   //
@@ -106,8 +106,8 @@ public:
 
   /** @brief Add data into position (x, y) and (y, x).
    *  @return <boolean> whether func success or not
-   *  @param x <integer> the location of line
-   *  @param y <integer> the location of column
+   *  @param line <integer> the location of line
+   *  @param culomn <integer> the location of column
    *  @param data <data_type> data adding
    */
   bool sym_add(int line, int culomn, data_type data) {
@@ -117,13 +117,16 @@ public:
                 : false);
   }
 
-  bool pos_erase(int line, int culomn) {
+  /** @brief erase data located on (line, culomn)
+   *  @return <boolean> erase operation's status
+   *  @param line <integer> the location of line
+   *  @param culomn <integer> the location of column
+   */
+  bool erase_position(int line, int culomn) {
     for (int i = 0; i < this->get_size(); ++i)
       if (this->list[i].line == line and //
-          this->list[i].culomn == culomn) {
-        this->erase(i);
-        return true;
-      }
+          this->list[i].culomn == culomn)
+        return this->erase(i);
     return false;
   }
 

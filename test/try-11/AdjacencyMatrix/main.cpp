@@ -16,32 +16,19 @@
 #include "AdjacencyMatrix.hpp"
 
 int main() {
-  adjacency_matrix<26> am("abcdef");
+  adjacency_matrix<26> graph("abcdef");
 
-  am.add_edge(1, 0, 2);
-  am.add_edge(0, 2, 5);
-  am.add_edge(0, 3, 30);
-  am.add_edge(2, 1, 15);
-  am.add_edge(1, 4, 8);
-  am.add_edge(4, 3, 4);
-  am.add_edge(5, 3, 10);
-  am.add_edge(5, 4, 18);
-  am.add_edge(2, 5, 7);
+  graph.add_edge(1, 0, 2);
+  graph.add_edge(0, 2, 5);
+  graph.add_edge(0, 3, 30);
+  graph.add_edge(2, 1, 15);
+  graph.add_edge(1, 4, 8);
+  graph.add_edge(4, 3, 4);
+  graph.add_edge(5, 3, 10);
+  graph.add_edge(5, 4, 18);
+  graph.add_edge(2, 5, 7);
 
-  am.print();
-  am.delete_edge(2);
-  am.print();
-  am.delete_vertex(2);
-  am.print();
-  am.delete_vertex(4);
-  am.print();
-
-  am.add_vertex('z');
-  am.print();
-  am.add_vertex('c');
-  am.print();
-  am.add_vertex('d');
-  am.print();
+  graph.print();
 
   return 0;
 }

@@ -13,6 +13,7 @@
  * with this program.If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include <iostream>
 #ifndef __adjacency_matrix_hpp
 #define __adjacency_matrix_hpp 1
 
@@ -108,6 +109,24 @@ public:
       }
   }
   //-------------------------- edge ------------------------------//
+
+  //------------------------- search -----------------------------//
+  // void get_first_next(int index) {}
+
+  void depth_first_search() {}
+
+  void depth_first_search(int index, int visited[]) {
+    // int w;
+    std::cout << this->vertices[index];
+
+    visited[index] = 1;
+    // w = {};
+  }
+
+  void breadth_first_ssearch() {}
+
+  // void breadth_first_ssearch(int index) {}
+  //------------------------- search -----------------------------//
 
   //--------------------------- print ----------------------------//
   void print_matrix() {
