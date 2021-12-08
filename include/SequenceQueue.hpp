@@ -21,16 +21,19 @@
 template <typename elem_type, int max_size> //
 class sequence_queue {
 protected:
-  // Var `count' should le `MaxSize'.
   elem_type queue[unsigned(max_size)];
-  int count = 0, front = 0;
+  int count{0}, front{0};
+  // Var `count' should le `MaxSize'.
 
 public:
+  sequence_queue() = default;
+
   // This constructor use x to init queue.
   sequence_queue(elem_type x) { this->append(x); }
-  ~sequence_queue() {}
 
-  int empty() { return this->count ? false : true; }
+  virtual ~sequence_queue() {}
+
+  bool empty() { return (this->count ? false : true); }
 
   bool append(elem_type x) {
     if (this->count > max_size)
@@ -41,18 +44,18 @@ public:
         (this->count + this->front) % max_size //
     ] = x;
 
-    this->count++;
+    ++this->count;
     return true;
   }
 
-  elem_type del() {
+  elem_type back() {
     if (this->empty())
       return elem_type(false);
 
     elem_type x = this->queue[this->front];
     ++this->front %= max_size;
 
-    this->count--;
+    --this->count;
     return x;
   }
 };

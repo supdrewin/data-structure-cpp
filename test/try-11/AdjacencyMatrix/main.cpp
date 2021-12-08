@@ -40,7 +40,7 @@ int main() {
 
   std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
       "Breath First Search:\n" SGR_RESET_ALL SGR_MAGENTA_FOREGROUND;
-  graph.breadth_first_ssearch();
+  graph.breadth_first_search();
 
   return 0;
 }

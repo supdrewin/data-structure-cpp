@@ -19,6 +19,7 @@
 #include <iomanip>
 
 #include "CompressedMatrix.hpp"
+#include "SequenceQueue.hpp"
 
 template <int max_vertex_number>
 class adjacency_matrix
@@ -123,13 +124,6 @@ public:
     return -1; // no any out degree found
   }
 
-  void depth_first_search() {
-    auto visited = new bool[unsigned(get_vertices_number())]();
-    for (int i = 0; i < this->get_vertices_number(); ++i)
-      visited[i] ? void(0) : this->depth_first_search(i, visited);
-    delete[] visited;
-  }
-
   void depth_first_search(int index, bool *visited) {
     index < 0 ? std::exit(EXIT_FAILURE) : void(0);
     int tmp_index = -1;
@@ -141,9 +135,26 @@ public:
       visited[tmp_index] ? void(0) : depth_first_search(tmp_index, visited);
   }
 
-  void breadth_first_ssearch() {}
+  void depth_first_search() {
+    auto visited = new bool[unsigned(get_vertices_number())]();
+    for (int i = 0; i < this->get_vertices_number(); ++i)
+      visited[i] ? void(0) : this->depth_first_search(i, visited);
+    delete[] visited;
+  }
 
-  // void breadth_first_ssearch(int index) {}
+  void breadth_first_search(int index, bool *visited) {
+    auto q = new sequence_queue<int, max_vertex_number>(index);
+
+    std::cout << this->vertices[unsigned(index)] << '\t';
+    visited[index] = true;
+  }
+
+  void breadth_first_search() {
+    auto visited = new bool[unsigned(get_vertices_number())]();
+    for (int i = 0; i < this->get_vertices_number(); ++i)
+      visited[i] ? void(0) : this->breadth_first_search(i, visited);
+    delete[] visited;
+  }
   //------------------------- search -----------------------------//
 
   //--------------------------- print ----------------------------//
