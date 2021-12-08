@@ -147,6 +147,7 @@ public:
     delete[] visited;
   }
 
+  // This method using queue just like previous `Pascal's Triangle`.
   void breadth_first_search(int index, bool *visited) {
     index < 0 ? std::exit(EXIT_FAILURE) : void(0);
     auto queue = new sequence_queue<int, max_vertex_number>(index);
