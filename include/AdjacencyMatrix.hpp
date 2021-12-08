@@ -111,6 +111,11 @@ public:
   //-------------------------- edge ------------------------------//
 
   //------------------------- search -----------------------------//
+  /** @brief Get the next out of vertex[index] that not visited.
+   *  @return <int> the index of vertex[index] out not visited
+   *  @param index <int> the index of vertex to get next out
+   *  @param visited(default -1) <int> index of last visited
+   */// -1 means no vertices are visited
   int get_next_vertex(int index, int visited = -1) {
     // check whether the index of vertex vaild or not
     (index >= 0 and index < this->get_vertices_number()) and

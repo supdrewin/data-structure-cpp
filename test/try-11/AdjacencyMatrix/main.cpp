@@ -30,8 +30,6 @@ int main() {
 
   graph.print();
 
-  std::cout << std::endl;
-
   std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
       "Depth First Search:\n" SGR_RESET_ALL SGR_MAGENTA_FOREGROUND;
   graph.depth_first_search();
@@ -41,6 +39,8 @@ int main() {
   std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
       "Breath First Search:\n" SGR_RESET_ALL SGR_MAGENTA_FOREGROUND;
   graph.breadth_first_search();
+
+  std::cout << std::endl;
 
   return 0;
 }
