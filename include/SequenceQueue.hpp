@@ -39,7 +39,7 @@ public:
     if (this->count > max_size)
       return false;
 
-    /* ((count + front)) can gt 100.          */
+    /* ((count + front)) can gt 100.           */
     this->queue[                               //
         (this->count + this->front) % max_size //
     ] = x;
