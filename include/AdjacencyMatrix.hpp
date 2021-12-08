@@ -13,7 +13,6 @@
  * with this program.If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <iostream>
 #ifndef __adjacency_matrix_hpp
 #define __adjacency_matrix_hpp 1
 
