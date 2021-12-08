@@ -26,7 +26,7 @@ class adjacency_matrix
     : public compressed_matrix<int, max_vertex_number, max_vertex_number> {
 protected:
   std::string vertices{};
-  int vertices_number{0};
+  int vertices_number{};
 
 public:
   adjacency_matrix() = default;
@@ -97,7 +97,7 @@ public:
   }
 
   void trim_edges_of_vertex(int vertex) {
-    for (int i = 0; i < this->get_size(); ++i)
+    for (int i{}; i < this->get_size(); ++i)
       if (this->list[i].line == vertex or //
           this->list[i].culomn == vertex)
         this->erase(i--);
@@ -117,7 +117,7 @@ public:
             (visited >= -1 and visited < this->get_vertices_number())
         ? void(0) // -1 means no vertices are visited
         : std::exit(EXIT_FAILURE);
-    for (int i = 0; i < this->edges_number(); ++i)
+    for (int i{}; i < this->edges_number(); ++i)
       if (index == this->list[i].line         // next vertex at the same in
           and this->list[i].culomn > visited) // but skip last visited out
         return this->list[i].culomn;
@@ -126,7 +126,7 @@ public:
 
   void depth_first_search(int index, bool *visited) {
     index < 0 ? std::exit(EXIT_FAILURE) : void(0);
-    int tmp_index = -1;
+    int tmp_index{-1};
 
     std::cout << this->vertices[unsigned(index)] << '\t';
     visited[index] = true;
@@ -137,21 +137,36 @@ public:
 
   void depth_first_search() {
     auto visited = new bool[unsigned(get_vertices_number())]();
-    for (int i = 0; i < this->get_vertices_number(); ++i)
+    for (int i{}; i < this->get_vertices_number(); ++i)
       visited[i] ? void(0) : this->depth_first_search(i, visited);
     delete[] visited;
   }
 
   void breadth_first_search(int index, bool *visited) {
-    auto q = new sequence_queue<int, max_vertex_number>(index);
+    index < 0 ? std::exit(EXIT_FAILURE) : void(0);
+    auto queue = new sequence_queue<int, max_vertex_number>(index);
+    int u, w;
 
     std::cout << this->vertices[unsigned(index)] << '\t';
     visited[index] = true;
+
+    while (not queue->empty()) {
+      u = queue->back();
+      w = this->get_next_vertex(u);
+      while (w != -1) {
+        if (not visited[w]) {
+          std::cout << this->vertices[unsigned(w)] << '\t';
+          visited[w] = true;
+          queue->append(w);
+        }
+        w = this->get_next_vertex(u, w);
+      }
+    }
   }
 
   void breadth_first_search() {
     auto visited = new bool[unsigned(get_vertices_number())]();
-    for (int i = 0; i < this->get_vertices_number(); ++i)
+    for (int i{}; i < this->get_vertices_number(); ++i)
       visited[i] ? void(0) : this->breadth_first_search(i, visited);
     delete[] visited;
   }
@@ -162,9 +177,9 @@ public:
     std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
         "Now print this adjacency matrix:\n" //
         SGR_RESET_ALL SGR_MAGENTA_FOREGROUND;
-    for (int i = 0, k = 0; i < this->get_vertices_number(); ++i) {
+    for (int i{}, k = 0; i < this->get_vertices_number(); ++i) {
       std::cout << vertices[size_t(i)];
-      for (int j = 0; j < this->get_vertices_number(); ++j)
+      for (int j{}; j < this->get_vertices_number(); ++j)
         std::cout << std::setw(6)
                   << ((this->list[k].line == i and //
                        this->list[k].culomn == j)
