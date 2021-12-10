@@ -1,7 +1,9 @@
 CXX       = clang++
-LDFLAGS  += -fuse-ld=lld -flto=thin
+LDFLAGS  += -fpie -fuse-ld=lld -rtlib=compiler-rt \
+            -stdlib=libc++ -unwindlib=libunwind \
+            -Wl,--as-needed
 
 include $(PREFIX)/Templates/template.mk
 
-CXXFLAGS += -stdlib=libc++
-LDFLAGS  += -lpthread
+CXXFLAGS += -flto=thin -glldb
+LDFLAGS  += -lpthread -lgcc

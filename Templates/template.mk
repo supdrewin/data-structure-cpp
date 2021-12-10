@@ -5,7 +5,8 @@ EXEC     ?= app
 
 CXXFLAGS += -std=c++2a -pipe -I$(PREFIX)/include
 CXXFLAGS += -Wall -Weffc++ -Wextra -Wsign-conversion -Werror
-CXXFLAGS += -pedantic-errors -g -O2 -finline-functions
+CXXFLAGS += -finline-functions -fstack-protector-strong
+CXXFLAGS += -pedantic-errors -g -O2
 
 LDFLAGS  ?= -flto
 LDFLAGS  += -L$(PREFIX)/lib/$(PLATFORM) -static -lutility
