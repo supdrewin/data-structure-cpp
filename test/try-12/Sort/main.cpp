@@ -46,7 +46,7 @@ int main() {
 
   begin = std::chrono::steady_clock::now();
 
-  arr.bubble_sort();
+  arr.quick_sort();
 
   end = std::chrono::steady_clock::now();
 

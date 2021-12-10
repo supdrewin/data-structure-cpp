@@ -63,6 +63,31 @@ template <typename type, unsigned size> struct array {
     }
   }
 
+  void quick_sort(int low = 0, int high = size - 1) {
+    base_data<type> tmp{this->elems[low]};
+    int _l{low}, _h{high};
+
+    while (_l < _h) {
+      while (_l < _h and tmp <= this->elems[_h])
+        --_h;
+      if (_l < _h)
+        this->elems[_l++] = this->elems[_h];
+
+      while (_l < _h and tmp > this->elems[_l])
+        ++_l;
+      if (_l < _h)
+        this->elems[_h--] = this->elems[_l];
+    }
+
+    //! _l should always eq _h
+    this->elems[_l] = tmp;
+
+    if (low < _l - 1)
+      this->quick_sort(low, _l - 1);
+    if (_l + 1 < high)
+      this->quick_sort(_l + 1, high);
+  }
+
   void select_sort() {
     for (int i{}, pos; i < int(size) - 1; ++i) {
       pos = i;
