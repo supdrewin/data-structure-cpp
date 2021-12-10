@@ -14,48 +14,215 @@
  */
 
 #include <chrono>
-#include <iostream>
 #include <random>
 
 #include "sort.hh"
 
-#define max_test_count 100
-
-static std::uniform_int_distribution<unsigned> dist(0, max_test_count);
+#define __array_size 20000
 
 int main() {
-  std::random_device rd;
+  std::chrono::duration<double> used_time;
+  std::chrono::time_point<std::chrono::steady_clock> begin, end;
 
-  sort::array<unsigned, max_test_count> arr;
+  std::random_device _dev_random;
+  std::uniform_int_distribution<unsigned> dist(0, __array_size);
 
+  my_cpp::array<unsigned, __array_size> arr;
+
+  //------------------------ bubble ----------------------------//
   for (auto &_ : arr)
-    _ = dist(rd);
+    _ = dist(_dev_random);
 
-  auto begin{std::chrono::steady_clock::now()};
+  begin = std::chrono::steady_clock::now();
 
-  // arr.insert_sort();
+  arr.bubble_sort();
 
-  auto end{std::chrono::steady_clock::now()};
+  end = std::chrono::steady_clock::now();
+  used_time = end - begin;
+  std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
+      "Random Bubble Sort: " SGR_RESET_ALL SGR_BROWN_FOREGROUND
+            << used_time.count() << "s\n";
+  //-//
 
-  std::chrono::duration<double> used_time = end - begin;
+  begin = std::chrono::steady_clock::now();
 
-  for (auto _ : arr)
-    std::cout << _.key << '\t';
+  arr.bubble_sort();
 
-  std::cout << "Used time: " << used_time.count() << "s\n";
+  end = std::chrono::steady_clock::now();
+  used_time = end - begin;
+  std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
+      "Sequence Bubble Sort: " SGR_RESET_ALL SGR_BROWN_FOREGROUND
+            << used_time.count() << "s\n";
+  //-//
+  my_cpp::sort(arr, true);
+
+  begin = std::chrono::steady_clock::now();
+
+  arr.bubble_sort();
+
+  end = std::chrono::steady_clock::now();
+  used_time = end - begin;
+  std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
+      "Reverse Bubble Sort: " SGR_RESET_ALL SGR_BROWN_FOREGROUND
+            << used_time.count() << "s\n"
+            << std::endl;
+  //------------------------------------------------------------//
+
+  //------------------------ insert ----------------------------//
+  for (auto &_ : arr)
+    _ = dist(_dev_random);
+
+  begin = std::chrono::steady_clock::now();
+
+  arr.insert_sort();
+
+  end = std::chrono::steady_clock::now();
+  used_time = end - begin;
+  std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
+      "Random Insert Sort: " SGR_RESET_ALL SGR_BROWN_FOREGROUND
+            << used_time.count() << "s\n";
+  //-//
+
+  begin = std::chrono::steady_clock::now();
+
+  arr.insert_sort();
+
+  end = std::chrono::steady_clock::now();
+  used_time = end - begin;
+  std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
+      "Sequence Insert Sort: " SGR_RESET_ALL SGR_BROWN_FOREGROUND
+            << used_time.count() << "s\n";
+  //-//
+  my_cpp::sort(arr, true);
+
+  begin = std::chrono::steady_clock::now();
+
+  arr.insert_sort();
+
+  end = std::chrono::steady_clock::now();
+  used_time = end - begin;
+  std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
+      "Reverse Insert Sort: " SGR_RESET_ALL SGR_BROWN_FOREGROUND
+            << used_time.count() << "s\n"
+            << std::endl;
+  //------------------------------------------------------------//
+
+  //------------------------- quick ----------------------------//
+  for (auto &_ : arr)
+    _ = dist(_dev_random);
 
   begin = std::chrono::steady_clock::now();
 
   arr.quick_sort();
 
   end = std::chrono::steady_clock::now();
-
   used_time = end - begin;
+  std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
+      "Random Quick Sort: " SGR_RESET_ALL SGR_BROWN_FOREGROUND
+            << used_time.count() << "s\n";
+  //-//
 
-  for (auto _ : arr)
-    std::cout << _.key << '\t';
+  begin = std::chrono::steady_clock::now();
 
-  std::cout << "Used time: " << used_time.count() << "s\n";
+  arr.quick_sort();
+
+  end = std::chrono::steady_clock::now();
+  used_time = end - begin;
+  std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
+      "Sequence Quick Sort: " SGR_RESET_ALL SGR_BROWN_FOREGROUND
+            << used_time.count() << "s\n";
+  //-//
+  my_cpp::sort(arr, true);
+
+  begin = std::chrono::steady_clock::now();
+
+  arr.quick_sort();
+
+  end = std::chrono::steady_clock::now();
+  used_time = end - begin;
+  std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
+      "Reverse Quick Sort: " SGR_RESET_ALL SGR_BROWN_FOREGROUND
+            << used_time.count() << "s\n"
+            << std::endl;
+  //------------------------------------------------------------//
+
+  //------------------------ select ----------------------------//
+  for (auto &_ : arr)
+    _ = dist(_dev_random);
+
+  begin = std::chrono::steady_clock::now();
+
+  arr.select_sort();
+
+  end = std::chrono::steady_clock::now();
+  used_time = end - begin;
+  std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
+      "Random Select Sort: " SGR_RESET_ALL SGR_BROWN_FOREGROUND
+            << used_time.count() << "s\n";
+  //-//
+
+  begin = std::chrono::steady_clock::now();
+
+  arr.select_sort();
+
+  end = std::chrono::steady_clock::now();
+  used_time = end - begin;
+  std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
+      "Sequence Select Sort: " SGR_RESET_ALL SGR_BROWN_FOREGROUND
+            << used_time.count() << "s\n";
+  //-//
+  my_cpp::sort(arr, true);
+
+  begin = std::chrono::steady_clock::now();
+
+  arr.select_sort();
+
+  end = std::chrono::steady_clock::now();
+  used_time = end - begin;
+  std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
+      "Reverse Select Sort: " SGR_RESET_ALL SGR_BROWN_FOREGROUND
+            << used_time.count() << "s\n"
+            << std::endl;
+  //------------------------------------------------------------//
+
+  //------------------------ shell -----------------------------//
+  for (auto &_ : arr)
+    _ = dist(_dev_random);
+
+  begin = std::chrono::steady_clock::now();
+
+  arr.shell_sort();
+
+  end = std::chrono::steady_clock::now();
+  used_time = end - begin;
+  std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
+      "Random Shell Sort: " SGR_RESET_ALL SGR_BROWN_FOREGROUND
+            << used_time.count() << "s\n";
+  //-//
+
+  begin = std::chrono::steady_clock::now();
+
+  arr.shell_sort();
+
+  end = std::chrono::steady_clock::now();
+  used_time = end - begin;
+  std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
+      "Sequence Shell Sort: " SGR_RESET_ALL SGR_BROWN_FOREGROUND
+            << used_time.count() << "s\n";
+  //-//
+  my_cpp::sort(arr, true);
+
+  begin = std::chrono::steady_clock::now();
+
+  arr.shell_sort();
+
+  end = std::chrono::steady_clock::now();
+  used_time = end - begin;
+  std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
+      "Reverse Shell Sort: " SGR_RESET_ALL SGR_BROWN_FOREGROUND
+            << used_time.count() << "s\n"
+            << std::endl;
+  //------------------------------------------------------------//
 
   return 0;
 }

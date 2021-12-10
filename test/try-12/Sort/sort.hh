@@ -16,12 +16,17 @@
 #ifndef __sort_hh
 #define __sort_hh 1
 
-namespace sort { //! DON'T declare using this namespace!
+#include "utility.hpp"
+
+namespace my_cpp { //! DON'T declare using this namespace!
 
 template <typename type> struct base_data {
   type key{}; //* a minimal member to be sorted
 
-  inline void operator=(type right) { this->key = right; }
+  base_data &operator=(type right) {
+    this->key = right;
+    return *this;
+  }
 
   inline bool operator>(base_data right) { return (this->key > right.key); }
   inline bool operator<(base_data right) { return (this->key < right.key); }
@@ -131,6 +136,14 @@ template <typename type, unsigned size> struct array {
   }
 };
 
-} // namespace sort
+template <typename type, unsigned size>
+inline void sort(array<type, size> &arr, bool reverse = false) {
+  std::sort(arr.begin(), arr.end(),
+            [reverse](base_data<type> &a, base_data<type> &b) {
+              return (reverse ? a > b : a < b);
+            });
+}
+
+} // namespace my_cpp
 
 #endif // !__sort_hh
