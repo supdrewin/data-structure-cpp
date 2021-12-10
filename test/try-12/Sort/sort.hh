@@ -48,6 +48,22 @@ template <typename type, unsigned size> struct array {
     }
   }
 
+  void select_sort() {
+    for (int i{}, pos; i < int(size) - 1; ++i) {
+      pos = i;
+
+      for (int j{i + 1}; j < int(size); ++j)
+        if (this->elems[j] < this->elems[pos])
+          pos = j;
+
+      if (pos != i) {
+        base_data<type> tmp = this->elems[i];
+        this->elems[i] = this->elems[pos];
+        this->elems[pos] = tmp;
+      }
+    }
+  }
+
   void shell_sort() {
     unsigned tmp_size{size}, loop{};
 

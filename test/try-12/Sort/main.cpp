@@ -19,7 +19,7 @@
 
 #include "sort.hh"
 
-#define max_test_count 100
+#define max_test_count 10000
 
 static std::uniform_int_distribution<unsigned> dist(0, max_test_count);
 
@@ -46,7 +46,7 @@ int main() {
 
   begin = std::chrono::steady_clock::now();
 
-  arr.shell_sort();
+  arr.select_sort();
 
   end = std::chrono::steady_clock::now();
 
