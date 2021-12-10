@@ -5,6 +5,7 @@
         "-fuse-ld=lld",
         "-I${workspaceFolder}/include",
         "-pedantic-errors",
+        "-rtlib=compiler-rt",
         "-std=c++2a",
         "-stdlib=libc++",
         "-Wall",
