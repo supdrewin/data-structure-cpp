@@ -38,6 +38,21 @@ template <typename type, unsigned size> struct array {
   inline base_data<type> *begin() { return &(this->elems[0]); }
   inline base_data<type> *end() { return &(this->elems[size]); }
 
+  void bubble_sort() {
+    for (int i{1}, flag{1}; i < int(size) and flag; ++i) {
+      flag = 0;
+
+      for (int j{0}; j < int(size) - i; j++)
+        if (this->elems[j] > this->elems[j + 1]) {
+          flag = 1;
+
+          base_data<type> tmp{this->elems[j]};
+          this->elems[j] = this->elems[j + 1];
+          this->elems[j + 1] = tmp;
+        }
+    }
+  }
+
   void insert_sort() {
     for (int i{1}, j; i < int(size); ++i) {
       base_data<type> tmp = this->elems[i];
