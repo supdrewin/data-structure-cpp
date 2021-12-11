@@ -18,7 +18,7 @@
 
 #include "sort.hh"
 
-#define __array_size 200
+#define __array_size 20000
 
 int main() {
   std::chrono::duration<double> used_time;
@@ -120,9 +120,6 @@ int main() {
   std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
       "Random Quick Sort: " SGR_RESET_ALL SGR_BROWN_FOREGROUND
             << used_time.count() << "s\n";
-  for (auto _ : arr)
-    std::cout << _.key << '\t';
-
   //-//
 
   begin = std::chrono::steady_clock::now();
