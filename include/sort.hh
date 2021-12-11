@@ -47,7 +47,7 @@ template <typename type, unsigned size> struct array {
     for (int i{1}, flag{1}; i < int(size) and flag; ++i) {
       flag = 0;
 
-      for (int j{0}; j < int(size) - i; j++)
+      for (int j{}; j < int(size) - i; j++)
         if (this->elems[j] > this->elems[j + 1]) {
           flag = 1;
 
@@ -78,7 +78,7 @@ template <typename type, unsigned size> struct array {
       if (_l < _h)
         this->elems[_l++] = this->elems[_h];
 
-      while (_l < _h and tmp > this->elems[_l])
+      while (_l < _h and tmp >= this->elems[_l])
         ++_l;
       if (_l < _h)
         this->elems[_h--] = this->elems[_l];
