@@ -17,8 +17,6 @@
 
 #include <memory>
 
-#include "utility.hpp"
-
 namespace my_cpp {
 
 template <typename __elems_type> //
@@ -51,15 +49,15 @@ public:
         __data(new value_type[__max_size]) {}
   ~queue() = default;
 
-  inline bool empty() const { return this->size() == 0; }
-  inline size_type size() const { return this->__count; }
+  bool empty() const { return this->size() == 0; }
+  size_type size() const { return this->__count; }
 
-  inline value_type front() {
+  value_type front() {
     return this->empty() ? static_cast<value_type>(0)
                          : this->__data[__count + __offset - 1];
   }
 
-  inline value_type back() {
+  value_type back() {
     return this->empty() ? static_cast<value_type>(0) //
                          : this->__data[__offset];
   }
@@ -73,11 +71,10 @@ public:
   }
 
   void pop() {
-    if (this->empty())
-      return;
-
-    ++this->__offset;
-    --this->__count;
+    if (!this->empty()) {
+      ++this->__offset;
+      --this->__count;
+    }
   }
 };
 

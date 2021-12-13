@@ -14,6 +14,7 @@
  */
 
 #include "queue.hpp"
+#include "utility.hpp"
 
 void triangle(int n) {
   my_cpp::queue<long> tmp_queue;
@@ -43,7 +44,9 @@ void triangle(int n) {
 }
 
 int __main() {
-  __assert(argc == 2 and atoi(argv[1]) > 0);
+  __assert(argc == 2 and         //
+           atoi(argv[1]) > 0 and //
+           atoi(argv[1]) < 35);
   triangle(atoi(argv[1]));
   return 0;
 }
