@@ -1,4 +1,4 @@
-/** sort.hh -*- C++ -*- Copyright (C) 2021 Supdrewin
+/** sort.hpp -*- C++ -*- Copyright (C) 2021 Supdrewin
  * This file is part of the Data Structure Cpp Project.
  * This Cpp project is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by the
@@ -12,10 +12,10 @@
  * with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef __sort_hh
-#define __sort_hh 1
+#ifndef __sort_hpp
+#define __sort_hpp 1
 
-#include "utility.hpp"
+#include <algorithm>
 
 namespace my_cpp { //! DON'T declare using this namespace!
 
@@ -27,20 +27,20 @@ template <typename type> struct base_data {
     return *this;
   }
 
-  inline bool operator>(base_data right) { return (this->key > right.key); }
-  inline bool operator<(base_data right) { return (this->key < right.key); }
-  inline bool operator>=(base_data right) { return (this->key >= right.key); }
-  inline bool operator<=(base_data right) { return (this->key <= right.key); }
-  inline bool operator==(base_data right) { return (this->key == right.key); }
-  inline bool operator!=(base_data right) { return (this->key != right.key); }
+  bool operator>(base_data right) { return (this->key > right.key); }
+  bool operator<(base_data right) { return (this->key < right.key); }
+  bool operator>=(base_data right) { return (this->key >= right.key); }
+  bool operator<=(base_data right) { return (this->key <= right.key); }
+  bool operator==(base_data right) { return (this->key == right.key); }
+  bool operator!=(base_data right) { return (this->key != right.key); }
 };
 
 template <typename type, unsigned size> struct array {
   base_data<type> elems[size];
 
   //! begin with it's head, and end after the last one
-  inline base_data<type> *begin() { return &(this->elems[0]); }
-  inline base_data<type> *end() { return &(this->elems[size]); }
+  base_data<type> *begin() { return &(this->elems[0]); }
+  base_data<type> *end() { return &(this->elems[size]); }
 
   void bubble_sort() {
     for (int i{1}, flag{1}; i < int(size) and flag; ++i) {
@@ -136,7 +136,7 @@ template <typename type, unsigned size> struct array {
 };
 
 template <typename type, unsigned size>
-inline void sort(array<type, size> &arr, bool reverse = false) {
+void sort(array<type, size> &arr, bool reverse = false) {
   using std::sort;
   sort(arr.begin(), arr.end(),
        [reverse](base_data<type> &a, base_data<type> &b) {
@@ -146,4 +146,4 @@ inline void sort(array<type, size> &arr, bool reverse = false) {
 
 } // namespace my_cpp
 
-#endif // !__sort_hh
+#endif // !__sort_hpp

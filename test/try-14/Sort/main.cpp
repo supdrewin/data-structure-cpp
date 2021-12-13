@@ -16,7 +16,8 @@
 #include <chrono>
 #include <random>
 
-#include "sort.hh"
+#include "sort.hpp"
+#include "utility.hpp"
 
 #define __array_size 20000
 
