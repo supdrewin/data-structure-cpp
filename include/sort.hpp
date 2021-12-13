@@ -137,11 +137,10 @@ template <typename type, unsigned size> struct array {
 
 template <typename type, unsigned size>
 inline void sort(array<type, size> &arr, bool reverse = false) {
-  using std::sort;
-  sort(arr.begin(), arr.end(),
-       [reverse](base_data<type> &a, base_data<type> &b) {
-         return (reverse ? a > b : a < b);
-       });
+  std::sort(arr.begin(), arr.end(),
+            [reverse](base_data<type> &a, base_data<type> &b) {
+              return (reverse ? a > b : a < b);
+            });
 }
 
 } // namespace my_cpp
