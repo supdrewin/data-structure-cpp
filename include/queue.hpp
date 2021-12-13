@@ -79,8 +79,6 @@ public:
     ++this->__offset;
     --this->__count;
   }
-
-  void swap() {}
 };
 
 } // namespace my_cpp
