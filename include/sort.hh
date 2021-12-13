@@ -13,7 +13,6 @@
  * this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <algorithm>
 #ifndef __sort_hh
 #define __sort_hh 1
 
