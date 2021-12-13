@@ -13,13 +13,13 @@
  * along with this program.If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "SequenceQueue.hpp"
+#include "queue.hpp"
 
 void triangle(int n) {
-  sequence_queue<long> queue;
-  int x, y{};
+  my_cpp::queue<long> tmp_queue;
+  tmp_queue.push(1);
 
-  queue.push(1);
+  int x, y{};
 
   for (int i{}; i < n; i++) {
     // Output an inverted triangle.
@@ -27,12 +27,12 @@ void triangle(int n) {
       std::cout << "   ";
 
     // For output 1->\n->1.
-    queue.push(0);
+    tmp_queue.push(0);
 
     for (int j = 0; j <= i + 1; j++) {
-      x = queue.back();
-      queue.pop();
-      i < n ? queue.push(x + y) : void(0);
+      x = tmp_queue.back();
+      tmp_queue.pop();
+      i < n ? tmp_queue.push(x + y) : void(0);
 
       if ((y = x))
         std::cout << x << "    ";

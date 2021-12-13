@@ -58,6 +58,9 @@ void _assert_fail(std::string assertion, std::string file, unsigned int line,
 #undef __assert
 #define __assert(expr) (static_cast<bool>(expr) ? void(0) : _ASSERT_FAIL(expr))
 
+#define safe_assert(expr)                                                      \
+  static_cast<bool>(expr) ? void(0) : std::exit(EXIT_FAILURE)
+
 #endif // __cplusplus
 
 #endif // !__utility_hpp

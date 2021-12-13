@@ -1,25 +1,26 @@
-/**
- * Copyright(C) 2021 Supdrewin <https://github.com/supdrewin>
- * SequenceQueue.hpp is part of Sequence Queue Example.
- * The Sequence Queue Example is free software: you can redistribute it
- * and/or modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation, either version 3 of
- * the License, or (at your option) any later version.
- * The Sequence Queue Example is distributed in the hope that it will be
- * useful, but WITHOUT ANY WARRANTY; without even the implied warranty
- * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * General Public License for more details.
- * You should have received a copy of the GNU General Public License
- * along with this program.If not, see <https://www.gnu.org/licenses/>.
+/** queue.hpp -*- C++ -*- Copyright (C) 2021 Supdrewin
+ * This file is part of the Data Structure Cpp Project.
+ * This Cpp project is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version.
+ * This Cpp project is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details.
+ * You should have received a copy of the GNU General Public License along
+ * with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef __sequence_queue_hpp
-#define __sequence_queue_hpp 1
+#ifndef __queue_hpp
+#define __queue_hpp 1
 
 #include "utility.hpp"
 
+namespace my_cpp {
+
 template <typename __elems_type> //
-class sequence_queue {
+class queue {
 private:
   using size_type = unsigned;
   using value_type = __elems_type;
@@ -43,10 +44,10 @@ protected:
   }
 
 public:
-  sequence_queue()
+  queue()
       : __count(0), __offset(0), __max_size(2), //
         __data(new value_type[__max_size]) {}
-  ~sequence_queue() = default;
+  ~queue() = default;
 
   inline bool empty() const { return this->size() == 0; }
   inline size_type size() const { return this->__count; }
@@ -80,4 +81,6 @@ public:
   void swap() {}
 };
 
-#endif // !__sequence_queue_hpp
+} // namespace my_cpp
+
+#endif // !__queue_hpp
