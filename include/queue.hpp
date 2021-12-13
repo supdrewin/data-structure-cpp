@@ -15,6 +15,8 @@
 #ifndef __queue_hpp
 #define __queue_hpp 1
 
+#include <memory>
+
 #include "utility.hpp"
 
 namespace my_cpp {

@@ -13,6 +13,7 @@
  * this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include <algorithm>
 #ifndef __sort_hh
 #define __sort_hh 1
 
@@ -138,10 +139,11 @@ template <typename type, unsigned size> struct array {
 
 template <typename type, unsigned size>
 inline void sort(array<type, size> &arr, bool reverse = false) {
-  std::sort(arr.begin(), arr.end(),
-            [reverse](base_data<type> &a, base_data<type> &b) {
-              return (reverse ? a > b : a < b);
-            });
+  using std::sort;
+  sort(arr.begin(), arr.end(),
+       [reverse](base_data<type> &a, base_data<type> &b) {
+         return (reverse ? a > b : a < b);
+       });
 }
 
 } // namespace my_cpp
