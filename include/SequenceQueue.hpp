@@ -18,46 +18,66 @@
 
 #include "utility.hpp"
 
-template <typename elem_type, int max_size> //
+template <typename __elems_type> //
 class sequence_queue {
+private:
+  using size_type = unsigned;
+  using value_type = __elems_type;
+
 protected:
-  elem_type queue[unsigned(max_size)];
-  int count{0}, front{0};
-  // Var `count' should le `MaxSize'.
+  size_type __count, __offset, __max_size;
+  std::unique_ptr<value_type[]> __data;
 
-public:
-  sequence_queue() = default;
-
-  // This constructor use x to init queue.
-  sequence_queue(elem_type x) { this->append(x); }
-
-  virtual ~sequence_queue() {}
-
-  bool empty() { return (this->count ? false : true); }
-
-  bool append(elem_type x) {
-    if (this->count > max_size)
+  bool resize(size_type _s) {
+    if (_s < __count)
       return false;
 
-    /* ((count + front)) can gt 100.           */
-    this->queue[                               //
-        (this->count + this->front) % max_size //
-    ] = x;
+    auto tmp = new value_type[_s];
+    for (unsigned i{}; i < __count; ++i)
+      tmp[i] = __data[i + __offset];
 
-    ++this->count;
+    this->__data.reset(tmp);
+    this->__max_size = _s;
+    this->__offset = 0;
     return true;
   }
 
-  elem_type back() {
-    if (this->empty())
-      return elem_type(false);
+public:
+  sequence_queue()
+      : __count(0), __offset(0), __max_size(2), //
+        __data(new value_type[__max_size]) {}
+  ~sequence_queue() = default;
 
-    elem_type x = this->queue[this->front];
-    ++this->front %= max_size;
+  inline bool empty() const { return this->size() == 0; }
+  inline size_type size() const { return this->__count; }
 
-    --this->count;
-    return x;
+  inline value_type front() {
+    return this->empty() ? static_cast<value_type>(0)
+                         : this->__data[__count + __offset - 1];
   }
+
+  inline value_type back() {
+    return this->empty() ? static_cast<value_type>(0) //
+                         : this->__data[__offset];
+  }
+
+  void push(value_type _v) {
+    if (__count + __offset == __max_size)
+      this->resize(this->size() * 2);
+
+    this->__data[__count + __offset] = _v;
+    ++this->__count;
+  }
+
+  void pop() {
+    if (this->empty())
+      return;
+
+    ++this->__offset;
+    --this->__count;
+  }
+
+  void swap() {}
 };
 
 #endif // !__sequence_queue_hpp

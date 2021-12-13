@@ -16,23 +16,26 @@
 #include "SequenceQueue.hpp"
 
 void triangle(int n) {
-  sequence_queue<int, 100> queue(1);
-  int x, y = 0;
+  sequence_queue<long> queue;
+  int x, y{};
 
-  for (int i = 0; i < n; i++) {
+  queue.push(1);
+
+  for (int i{}; i < n; i++) {
     // Output an inverted triangle.
-    for (int j = 0; j < n - i; j++)
+    for (int j{}; j < n - i; j++)
       std::cout << "   ";
 
     // For output 1->\n->1.
-    queue.append(0);
+    queue.push(0);
 
-    for (int j = 0; j <= i + 1; j++) { // i j   j   i j   j   j   i j
-      x = queue.back();                // 0 0   1   1 0   1   2   2 0
-      i < n ? queue.append(x + y) : 0; // y x y x y   x y x y x y   ...
-                                       // 0 1 1 0 0   1 1 1 1 0 0   ...
-      if ((y = x))                     // + + - + - + + - + - + - + ...
-        std::cout << x << "    ";      // 0 1 1 1 0 0 1 1 2 1 1 0 0 ...
+    for (int j = 0; j <= i + 1; j++) {
+      x = queue.back();
+      queue.pop();
+      i < n ? queue.push(x + y) : void(0);
+
+      if ((y = x))
+        std::cout << x << "    ";
       else
         std::cout << std::endl;
     }
