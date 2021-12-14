@@ -19,33 +19,32 @@
 
 namespace my_cpp {
 
-template <class _Tp> class deque {
+template <class value_type> class deque {
 public:
   using size_type = unsigned long;
-  using value_type = _Tp;
 
 protected:
-  size_type __count, __offset, __max_size;
-  array<value_type> __data;
+  size_type count, offset, __max_size;
+  array<value_type> data;
 
 public:
-  deque() : __count(0), __offset(0), __max_size(2), __data(__max_size) {}
+  deque() : count(0), offset(0), __max_size(2), data(__max_size) {}
 
-  size_type size() const noexcept { return this->__count; }
+  size_type size() const noexcept { return this->count; }
 
   size_type max_size() const noexcept { return this->__max_size; }
 
   void resize(size_type __n) {
-    if (__n < __count)
-      __n = __count;
+    if (__n < count)
+      __n = count;
 
     auto tmp = new value_type[__n];
-    for (unsigned i{}; i < __count; ++i)
-      tmp[i] = __data[(i + __offset) % __max_size];
+    for (size_type i{}; i < count; ++i)
+      tmp[i] = data[(i + offset) % __max_size];
 
-    this->__data.reset(tmp);
+    this->data.reset(tmp);
     this->__max_size = __n;
-    this->__offset = 0;
+    this->offset = 0;
   }
 
   void shrink_to_fit() noexcept { this->resize(this->size()); }
@@ -53,38 +52,38 @@ public:
   bool empty() const noexcept { return this->size() == 0; }
 
   value_type front() noexcept {
-    return this->empty() ? static_cast<value_type>(0) : this->__data[__offset];
+    return this->empty() ? static_cast<value_type>(0) : this->data[offset];
   }
 
   value_type back() noexcept {
     return this->empty() ? static_cast<value_type>(0)
-                         : this->__data[(__count + __offset - 1) % __max_size];
+                         : this->data[(count + offset - 1) % __max_size];
   }
 
   void push_front(value_type __v) {
-    if (__count == __max_size)
+    if (count == __max_size)
       this->resize(this->size() * 2);
 
-    this->__data[__offset ? --__offset : __offset = __max_size - 1] = __v;
-    ++this->__count;
+    this->data[offset ? --offset : offset = __max_size - 1] = __v;
+    ++this->count;
   }
 
   void push_back(value_type __v) {
-    if (__count == __max_size)
+    if (count == __max_size)
       this->resize(this->size() * 2);
 
-    this->__data[(__count + __offset) % __max_size] = __v;
-    ++this->__count;
+    this->data[(count + offset) % __max_size] = __v;
+    ++this->count;
   }
 
   void pop_front() {
     if (!this->empty()) {
-      ++this->__offset %= __max_size;
-      --this->__count;
+      ++this->offset %= __max_size;
+      --this->count;
     }
   }
 
-  void pop_back() { this->empty() ? 0 : --this->__count; }
+  void pop_back() { this->empty() ? 0 : --this->count; }
 };
 
 } // namespace my_cpp

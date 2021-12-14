@@ -18,27 +18,26 @@
 #include "deque.hpp"
 namespace my_cpp {
 
-template <class _Tp> class stack {
+template <class value_type> class stack {
 public:
-  using container_type = deque<_Tp>;
+  using container_type = deque<value_type>;
   using size_type = typename container_type::size_type;
-  using value_type = typename container_type::value_type;
 
 protected:
-  container_type c;
+  container_type __stack;
 
 public:
-  stack() : c() {}
+  stack() : __stack() {}
 
-  bool empty() const { return c.empty(); }
+  bool empty() const { return __stack.empty(); }
 
-  size_type size() const { return c.size(); }
+  size_type size() const { return __stack.size(); }
 
-  value_type top() { return c.back(); }
+  value_type top() { return __stack.back(); }
 
-  void push(value_type __v) { c.push_back(__v); }
+  void push(value_type __v) { __stack.push_back(__v); }
 
-  void pop() { c.pop_back(); }
+  void pop() { __stack.pop_back(); }
 };
 
 } // namespace my_cpp

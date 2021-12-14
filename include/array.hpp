@@ -17,61 +17,60 @@
 
 namespace my_cpp {
 
-template <class _Tp> class array {
+template <class value_type> class array {
 public:
   using container_type = array;
   using size_type = unsigned long;
-  using value_type = _Tp;
   using reference = value_type &;
 
 protected:
-  size_type __max_size;
-  value_type *data;
+  size_type __size;
+  value_type *__data;
 
 public:
-  array() : __max_size(), data(new value_type[__max_size]()) {}
+  array() : __size(), __data(new value_type[__size]()) {}
 
-  array(size_type __n) : __max_size(__n), data(new value_type[__max_size]()) {}
+  array(size_type __n) : __size(__n), __data(new value_type[__size]()) {}
 
   array(const container_type &__arr) { this->operator=(__arr); }
 
   ~array() { this->reset(); }
 
-  size_type size() const noexcept { return this->__max_size; }
+  size_type size() const noexcept { return this->__size; }
 
-  value_type *begin() { return &this->operator[](0); }
+  value_type *begin() noexcept { return &this->operator[](0); }
 
-  value_type *end() { return &this->operator[](__max_size); }
+  value_type *end() noexcept { return &this->operator[](__size); }
 
   reference at(size_type __i) {
-    if (__i >= __max_size)
+    if (__i >= __size)
       this->resize(__i + 1);
-    return this->data[__i];
+    return this->__data[__i];
   }
 
   void resize(size_type __n) {
-    __n < __max_size ? __max_size = __n : 0;
+    __n < __size ? __size = __n : 0;
     auto tmp = new value_type[__n]();
 
-    for (size_type i{}; i < __max_size; ++i)
+    for (size_type i{}; i < __size; ++i)
       tmp[i] = this->operator[](i);
 
-    this->__max_size = __n;
+    this->__size = __n;
     this->reset(tmp);
   }
 
-  void reset(value_type *__v = nullptr) {
-    delete[] this->data;
-    this->data = __v;
+  void reset(value_type *__v = nullptr) noexcept {
+    delete[] this->__data;
+    this->__data = __v;
   }
 
-  container_type &operator=(const container_type &__arr) {
-    this->__max_size = __arr.__max_size;
-    this->reset(__arr.data);
+  container_type &operator=(const container_type &__arr) noexcept {
+    this->__size = __arr.__size;
+    this->reset(__arr.__data);
     return *this;
   }
 
-  reference operator[](size_type __i) { return this->data[__i]; }
+  reference operator[](size_type __i) const { return this->__data[__i]; }
 };
 
 } // namespace my_cpp
