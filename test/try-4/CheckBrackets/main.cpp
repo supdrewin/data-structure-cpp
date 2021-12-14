@@ -13,10 +13,11 @@
  * this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "SequenceStack.hpp"
+#include "stack.hpp"
+#include "utility.hpp"
 
 bool check(std::string expr) {
-  SequenceStack<char, 100> stack;
+  my_cpp::stack<char> stack;
 
   for (size_t i = 0; expr[i]; i++)
     if (expr[i] == '[' or // push `[' and `(' into stack

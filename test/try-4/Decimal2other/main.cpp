@@ -13,15 +13,17 @@
  * this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include "SequenceStack.hpp"
+#include "stack.hpp"
+#include "utility.hpp"
 
 void convert(int decimal, int scale) {
   if (scale < 2)
     std::exit(EXIT_FAILURE);
 
-  SequenceStack<char, 100> stack;
+  my_cpp::stack<char> stack;
 
   char sign = '+';
+
   if (decimal < 0) {
     decimal = -decimal;
     sign = '-';
@@ -35,8 +37,11 @@ void convert(int decimal, int scale) {
 
   std::cout << sign;
 
-  while (!stack.empty())
-    std::cout << stack.pop();
+  while (!stack.empty()) {
+    std::cout << stack.top();
+    stack.pop();
+  }
+
   std::cout << std::endl;
 }
 

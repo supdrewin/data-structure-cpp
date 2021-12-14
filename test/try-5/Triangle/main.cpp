@@ -17,8 +17,8 @@
 #include "utility.hpp"
 
 void triangle(int n) {
-  my_cpp::queue<long> tmp_queue;
-  tmp_queue.push(1);
+  my_cpp::queue<long> queue;
+  queue.push(1);
 
   int x, y{};
 
@@ -28,12 +28,12 @@ void triangle(int n) {
       std::cout << "   ";
 
     // For output 1->\n->1.
-    tmp_queue.push(0);
+    queue.push(0);
 
     for (int j = 0; j <= i + 1; j++) {
-      x = tmp_queue.front();
-      tmp_queue.pop();
-      i < n ? tmp_queue.push(x + y) : void(0);
+      x = queue.front();
+      queue.pop();
+      i < n ? queue.push(x + y) : void(0);
 
       if ((y = x))
         std::cout << x << "    ";
