@@ -31,14 +31,12 @@ protected:
   struct huffman_tree_node {
     int left_child, right_child, parent;
     weight_type weight, max_weight;
-
     unsigned code{};
 
     // all parents and children are init as invaild
     huffman_tree_node()
         : left_child{-1}, right_child{-1}, parent{-1}, //
-          weight{0}, max_weight{0} {}
-    ~huffman_tree_node() {}
+          code{}, weight{}, max_weight{} {}
   } node[unsigned(root + 1)];
   // actual buffman tree
 
