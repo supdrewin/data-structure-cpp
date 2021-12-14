@@ -21,7 +21,7 @@ namespace my_cpp {
 
 template <class _Tp> class deque {
 public:
-  using size_type = unsigned;
+  using size_type = size_t;
   using value_type = _Tp;
 
 protected:

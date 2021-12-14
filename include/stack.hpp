@@ -17,6 +17,7 @@
 
 #include "deque.hpp"
 namespace my_cpp {
+
 template <class _Tp> class stack {
 public:
   using container_type = deque<_Tp>;
