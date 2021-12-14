@@ -25,12 +25,12 @@ public:
 
 protected:
   size_type __size;
-  value_type *__data;
+  value_type *data;
 
 public:
-  array() : __size(), __data(new value_type[__size]()) {}
+  array() : __size(), data(new value_type[__size]()) {}
 
-  array(size_type __n) : __size(__n), __data(new value_type[__size]()) {}
+  array(size_type __n) : __size(__n), data(new value_type[__size]()) {}
 
   array(const container_type &__arr) { this->operator=(__arr); }
 
@@ -45,7 +45,7 @@ public:
   reference at(size_type __i) {
     if (__i >= __size)
       this->resize(__i + 1);
-    return this->__data[__i];
+    return this->data[__i];
   }
 
   void resize(size_type __n) {
@@ -60,17 +60,17 @@ public:
   }
 
   void reset(value_type *__v = nullptr) noexcept {
-    delete[] this->__data;
-    this->__data = __v;
+    delete[] this->data;
+    this->data = __v;
   }
 
   container_type &operator=(const container_type &__arr) noexcept {
     this->__size = __arr.__size;
-    this->reset(__arr.__data);
+    this->reset(__arr.data);
     return *this;
   }
 
-  reference operator[](size_type __i) const { return this->__data[__i]; }
+  reference operator[](size_type __i) const { return this->data[__i]; }
 };
 
 } // namespace my_cpp
