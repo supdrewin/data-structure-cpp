@@ -15,67 +15,38 @@
 #ifndef __queue_hpp
 #define __queue_hpp 1
 
-#include <memory>
+#include "deque.hpp"
 
 namespace my_cpp {
-
-template <typename __elems_type> //
-class queue {
-private:
-  using size_type = unsigned;
-  using value_type = __elems_type;
+template <class _Tp> class queue {
+public:
+  using container_type = deque<_Tp>;
+  using size_type = typename container_type::size_type;
+  using value_type = typename container_type::value_type;
+  using reference = typename container_type::reference;
+  using const_reference = typename container_type::const_reference;
 
 protected:
-  size_type __count, __offset, __max_size;
-  std::unique_ptr<value_type[]> __data;
-
-  bool resize(size_type _s) {
-    if (_s < __count)
-      return false;
-
-    auto tmp = new value_type[_s];
-    for (unsigned i{}; i < __count; ++i)
-      tmp[i] = __data[i + __offset];
-
-    this->__data.reset(tmp);
-    this->__max_size = _s;
-    this->__offset = 0;
-    return true;
-  }
+  container_type c;
 
 public:
-  queue()
-      : __count(0), __offset(0), __max_size(2), //
-        __data(new value_type[__max_size]) {}
-  ~queue() = default;
+  queue() : c() {}
 
-  bool empty() const { return this->size() == 0; }
-  size_type size() const { return this->__count; }
+  bool empty() const { return c.empty(); }
 
-  value_type front() {
-    return this->empty() ? static_cast<value_type>(0)
-                         : this->__data[__count + __offset - 1];
-  }
+  size_type size() const { return c.size(); }
 
-  value_type back() {
-    return this->empty() ? static_cast<value_type>(0) //
-                         : this->__data[__offset];
-  }
+  value_type front() { return c.front(); }
 
-  void push(value_type _v) {
-    if (__count + __offset == __max_size)
-      this->resize(this->size() * 2);
+  // const_reference front() const { return c.front(); }
 
-    this->__data[__count + __offset] = _v;
-    ++this->__count;
-  }
+  value_type back() { return c.back(); }
 
-  void pop() {
-    if (!this->empty()) {
-      ++this->__offset;
-      --this->__count;
-    }
-  }
+  // const_reference back() const { return c.back(); }
+
+  void push(const value_type &__v) { c.push_back(__v); }
+
+  void pop() { c.pop_front(); }
 };
 
 } // namespace my_cpp

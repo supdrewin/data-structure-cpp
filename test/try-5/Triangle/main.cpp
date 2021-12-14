@@ -31,7 +31,7 @@ void triangle(int n) {
     tmp_queue.push(0);
 
     for (int j = 0; j <= i + 1; j++) {
-      x = tmp_queue.back();
+      x = tmp_queue.front();
       tmp_queue.pop();
       i < n ? tmp_queue.push(x + y) : void(0);
 
