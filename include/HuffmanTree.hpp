@@ -18,6 +18,7 @@
 
 #include <iomanip>
 
+#include "stack.hpp"
 #include "utility.hpp"
 
 template <typename weight_type, int node_count> //
@@ -31,7 +32,7 @@ protected:
     int left_child, right_child, parent;
     weight_type weight, max_weight;
 
-    std::string code{};
+    unsigned code{};
 
     // all parents and children are init as invaild
     huffman_tree_node()
@@ -42,18 +43,34 @@ protected:
   // actual buffman tree
 
   struct code_node {
-    char mark{};
-    std::string code{};
+    char mark;
+    my_cpp::stack<unsigned> code;
 
     // print list node
     void print() {
-      std::cout << std::setw(4) << this->mark          //
-                << std::setw(node_count) << this->code //
-                << std::endl;
+      auto _s = this->code.size();
+      auto out = new unsigned[_s];
+
+      for (unsigned i{}; i < _s; ++i) {
+        out[i] = this->code.top();
+        this->code.pop();
+      }
+
+      std::cout << std::setw(4) << this->mark;
+
+      for (int i{}; i < node_count - int(_s); ++i)
+        std::cout << ' ';
+
+      for (unsigned i{}; i < _s; ++i) {
+        this->code.push(out[_s - i - 1]);
+        std::cout << out[i];
+      }
+
+      std::cout << '\n';
+      delete[] out;
     }
 
-    code_node() = default;
-    ~code_node() {}
+    code_node() : mark(), code() {}
   } code_list[unsigned(node_count)];
 
   // index of code list
@@ -103,10 +120,9 @@ public:
     this->node[0].parent = this->node[1].parent = node_count;
 
     this->node[node_count].left_child = 0;
-    this->node[0].code = std::string("0");
 
     this->node[node_count].right_child = 1;
-    this->node[1].code = std::string("1");
+    this->node[1].code = 1;
 
     // each tree node with their parents and children
     for (int i = 1; i < node_count - 1; ++i) {
@@ -118,16 +134,14 @@ public:
       // judging left and right child trees
       if (this->node[node_count + i - 1].weight < this->node[i + 1].weight) {
         this->node[node_count + i].left_child = node_count + i - 1;
-        this->node[node_count + i - 1].code = std::string("0");
 
         this->node[node_count + i].right_child = i + 1;
-        this->node[i + 1].code = std::string("1");
+        this->node[i + 1].code = 1;
       } else {
         this->node[node_count + i].left_child = i + 1;
-        this->node[i + 1].code = std::string("0");
 
         this->node[node_count + i].right_child = node_count + i - 1;
-        this->node[node_count + i - 1].code = std::string("1");
+        this->node[node_count + i - 1].code = 1;
       }
     }
   }
@@ -143,7 +157,7 @@ public:
     for (int i = 0; i < node_count; ++i)
       for (int j = i; j < root; j = this->node[j].parent)
         this->code_list[this->code_index[i]] //
-            .code.insert(0, this->node[j].code);
+            .code.push(this->node[j].code);
   }
 
   // print the code list
