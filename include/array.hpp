@@ -37,7 +37,7 @@ public:
 
   ~array() { this->reset(); }
 
-  size_type size() { return this->__max_size; }
+  size_type size() const noexcept { return this->__max_size; }
 
   value_type *begin() { return &this->operator[](0); }
 

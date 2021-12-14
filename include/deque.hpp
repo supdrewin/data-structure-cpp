@@ -15,23 +15,21 @@
 #ifndef __deque_hpp
 #define __deque_hpp 1
 
-#include <memory>
+#include "array.hpp"
 
 namespace my_cpp {
 
 template <class _Tp> class deque {
 public:
-  using size_type = size_t;
+  using size_type = unsigned long;
   using value_type = _Tp;
 
 protected:
   size_type __count, __offset, __max_size;
-  std::unique_ptr<value_type[]> __data;
+  array<value_type> __data;
 
 public:
-  deque()
-      : __count(0), __offset(0), __max_size(2),
-        __data(new value_type[__max_size]) {}
+  deque() : __count(0), __offset(0), __max_size(2), __data(__max_size) {}
 
   size_type size() const noexcept { return this->__count; }
 
