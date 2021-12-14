@@ -36,7 +36,7 @@ protected:
     // all parents and children are init as invaild
     huffman_tree_node()
         : left_child{-1}, right_child{-1}, parent{-1}, //
-          code{}, weight{}, max_weight{} {}
+          weight{}, max_weight{}, code{} {}
   } node[unsigned(root + 1)];
   // actual buffman tree
 
