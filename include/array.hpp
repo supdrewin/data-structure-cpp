@@ -69,7 +69,7 @@ public:
     this->__max_size = __arr.__max_size;
     this->reset(__arr.data);
     return *this;
-  };
+  }
 
   reference operator[](size_type __i) { return this->data[__i]; }
 };
