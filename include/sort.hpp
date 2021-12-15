@@ -17,7 +17,7 @@
 
 #include <algorithm>
 
-namespace via { //! DON'T declare using this namespace!
+namespace via {
 
 template <typename type> struct base_data {
   type key{}; //* a minimal member to be sorted
