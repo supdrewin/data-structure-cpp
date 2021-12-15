@@ -17,7 +17,7 @@
 
 #include <algorithm>
 
-namespace my_cpp { //! DON'T declare using this namespace!
+namespace via { //! DON'T declare using this namespace!
 
 template <typename type> struct base_data {
   type key{}; //* a minimal member to be sorted
@@ -143,6 +143,6 @@ inline void sort(array<type, size> &arr, bool reverse = false) {
             });
 }
 
-} // namespace my_cpp
+} // namespace via
 
 #endif // !__sort_hpp

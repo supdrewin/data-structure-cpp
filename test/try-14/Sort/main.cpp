@@ -26,7 +26,7 @@ int main() {
 
   std::uniform_int_distribution<unsigned> dist(0, __array_size);
 
-  my_cpp::array<unsigned, __array_size> random_array;
+  via::array<unsigned, __array_size> random_array;
 
   for (auto &_ : random_array)
     _ = dist(_dev_random);
@@ -36,7 +36,7 @@ int main() {
   //------------------------- std ------------------------------//
   auto begin = std::chrono::steady_clock::now();
 
-  my_cpp::sort(test_array);
+  via::sort(test_array);
 
   auto end = std::chrono::steady_clock::now();
 
@@ -49,7 +49,7 @@ int main() {
 
   begin = std::chrono::steady_clock::now();
 
-  my_cpp::sort(test_array);
+  via::sort(test_array);
 
   end = std::chrono::steady_clock::now();
 
@@ -64,7 +64,7 @@ int main() {
 
   begin = std::chrono::steady_clock::now();
 
-  my_cpp::sort(reverse_array, true);
+  via::sort(reverse_array, true);
 
   end = std::chrono::steady_clock::now();
 

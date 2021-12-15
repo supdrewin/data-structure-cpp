@@ -15,7 +15,7 @@
 #ifndef __array_hpp
 #define __array_hpp
 
-namespace my_cpp {
+namespace via {
 
 template <class value_type> class array {
 public:
@@ -73,6 +73,6 @@ public:
   reference operator[](size_type __i) const { return this->data[__i]; }
 };
 
-} // namespace my_cpp
+} // namespace via
 
 #endif // !__array_hpp

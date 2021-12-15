@@ -20,7 +20,7 @@ void convert(int decimal, int scale) {
   if (scale < 2)
     std::exit(EXIT_FAILURE);
 
-  my_cpp::stack<char> stack;
+  via::stack<char> stack;
 
   char sign = '+';
 

@@ -17,7 +17,7 @@
 #include "utility.hpp"
 
 bool check(std::string expr) {
-  my_cpp::stack<char> stack;
+  via::stack<char> stack;
 
   for (size_t i = 0; expr[i]; i++)
     if (expr[i] == '[' or // push `[' and `(' into stack

@@ -17,7 +17,7 @@
 
 #include "array.hpp"
 
-namespace my_cpp {
+namespace via {
 
 template <class value_type> class deque {
 public:
@@ -86,6 +86,6 @@ public:
   void pop_back() { this->empty() ? 0 : --this->count; }
 };
 
-} // namespace my_cpp
+} // namespace via
 
 #endif // !__deque_hpp

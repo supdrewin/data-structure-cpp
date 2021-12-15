@@ -17,7 +17,7 @@
 #include "array.hpp"
 
 int main() {
-  my_cpp::array<int> arr;
+  via::array<int> arr;
 
   arr.at(0) = 1;
   arr.at(2) = 1;

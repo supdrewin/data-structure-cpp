@@ -17,7 +17,7 @@
 
 #include "deque.hpp"
 
-namespace my_cpp {
+namespace via {
 
 template <class value_type> class queue {
 public:
@@ -43,6 +43,6 @@ public:
   void pop() { __queue.pop_front(); }
 };
 
-} // namespace my_cpp
+} // namespace via
 
 #endif // !__queue_hpp

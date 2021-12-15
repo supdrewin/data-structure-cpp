@@ -42,7 +42,7 @@ protected:
 
   struct code_node {
     char mark;
-    my_cpp::stack<unsigned> code;
+    via::stack<unsigned> code;
 
     // print list node
     void print() {

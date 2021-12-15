@@ -17,7 +17,7 @@
 #include "utility.hpp"
 
 void triangle(int n) {
-  my_cpp::queue<long> queue;
+  via::queue<long> queue;
   queue.push(1);
 
   int x, y{};
