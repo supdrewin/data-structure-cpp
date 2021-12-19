@@ -31,29 +31,29 @@ int main() {
   graph.print();
 
   std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
-      "Depth First Search:\n" SGR_RESET_ALL SGR_MAGENTA_FOREGROUND;
+      "Depth First Search:\t" SGR_RESET_ALL SGR_MAGENTA_FOREGROUND;
   graph.depth_first_search();
 
   std::cout << std::endl;
 
   std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
-      "Breath First Search:\n" SGR_RESET_ALL SGR_MAGENTA_FOREGROUND;
+      "Breath First Search:\t" SGR_RESET_ALL SGR_MAGENTA_FOREGROUND;
   graph.breadth_first_search();
 
   std::cout << std::endl;
 
   graph.dijkstra(0);
   std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
-      "Dist[]:\t" SGR_RESET_ALL SGR_MAGENTA_FOREGROUND;
+      "Dist[]:" SGR_RESET_ALL SGR_MAGENTA_FOREGROUND;
   for (size_t i{}; i < graph.get_vertices_number(); ++i)
-    std::cout << graph.distance[i] << '\t';
+    std::cout << '\t' << graph.distance[i];
 
   std::cout << std::endl;
 
   std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
-      "Path[]:\t" SGR_RESET_ALL SGR_MAGENTA_FOREGROUND;
+      "Path[]:" SGR_RESET_ALL SGR_MAGENTA_FOREGROUND;
   for (size_t i{}; i < graph.get_vertices_number(); ++i)
-    std::cout << graph.path[i] << '\t';
+    std::cout << '\t' << graph.path[i];
 
   return 0;
 }

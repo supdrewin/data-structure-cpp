@@ -51,7 +51,7 @@ public:
 
   void print_vertices_number() {
     std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
-        "The number of vertices: " SGR_RESET_ALL SGR_MAGENTA_FOREGROUND
+        "The number of vertices:\t" SGR_RESET_ALL SGR_MAGENTA_FOREGROUND
               << this->vertices_number << std::endl;
   }
   //----------------- vertices number ----------------------------//
@@ -62,7 +62,7 @@ public:
 
   void print_edges_number() {
     std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
-        "The number of edges: " SGR_RESET_ALL SGR_MAGENTA_FOREGROUND
+        "The number of edges:\t" SGR_RESET_ALL SGR_MAGENTA_FOREGROUND
               << this->edges_number() << std::endl;
   }
   //-------------------- edges number ----------------------------//
@@ -123,8 +123,7 @@ public:
 public:
   //-------------------------- path ------------------------------//
   void dijkstra(size_type index) {
-    via::array<bool> mark(size_type(this->get_vertices_number()));
-    mark[index] = true;
+    via::array<bool> mark(this->get_vertices_number());
 
     this->distance.resize(this->get_vertices_number());
     this->distance.fill(-1);
@@ -144,6 +143,9 @@ public:
         this->path[i] = int(index);
     }
 
+    this->distance[index] = 0;
+    mark[index] = true;
+
     for (size_type i{1}; i < this->get_vertices_number(); ++i) {
       size_type close{};
       int min{-1};
@@ -161,7 +163,6 @@ public:
       mark[close] = true;
       for (size_type j{}; j < this->get_vertices_number(); ++j)
         for (size_type k{}; k < this->edges_number(); ++k) {
-
           if (this->list[k].line == int(close) and
               this->list[k].culomn == int(j)) {
             if (not mark[j] and (this->distance[j] == -1 or
@@ -169,6 +170,7 @@ public:
                                      this->distance[j])) {
               this->distance[j] = this->distance[close] + this->list[k].data;
               this->path[j] = int(close);
+              break;
             }
           }
         }
@@ -264,9 +266,9 @@ public:
   }
 
   void print() {
+    this->print_matrix();
     this->print_vertices_number();
     this->print_edges_number();
-    this->print_matrix();
   }
   //--------------------------- print ----------------------------//
 };
