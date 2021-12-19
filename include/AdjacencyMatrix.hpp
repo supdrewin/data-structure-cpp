@@ -161,10 +161,11 @@ public:
         return;
 
       mark[close] = true;
+
       for (size_type j{}; j < this->get_vertices_number(); ++j)
-        for (size_type k{}; k < this->edges_number(); ++k) {
+        for (size_type k{}; k < this->edges_number(); ++k)
           if (this->list[k].line == int(close) and
-              this->list[k].culomn == int(j)) {
+              this->list[k].culomn == int(j))
             if (not mark[j] and (this->distance[j] == -1 or
                                  this->distance[close] + this->list[k].data <
                                      this->distance[j])) {
@@ -172,8 +173,6 @@ public:
               this->path[j] = int(close);
               break;
             }
-          }
-        }
     }
   }
   //-------------------------- path ------------------------------//
