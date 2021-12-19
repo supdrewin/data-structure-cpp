@@ -42,5 +42,18 @@ int main() {
 
   std::cout << std::endl;
 
+  graph.dijkstra(0);
+  std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
+      "Dist[]:\t" SGR_RESET_ALL SGR_MAGENTA_FOREGROUND;
+  for (size_t i{}; i < graph.get_vertices_number(); ++i)
+    std::cout << graph.distance[i] << '\t';
+
+  std::cout << std::endl;
+
+  std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
+      "Path[]:\t" SGR_RESET_ALL SGR_MAGENTA_FOREGROUND;
+  for (size_t i{}; i < graph.get_vertices_number(); ++i)
+    std::cout << graph.path[i] << '\t';
+
   return 0;
 }

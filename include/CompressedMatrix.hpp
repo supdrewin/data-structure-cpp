@@ -38,15 +38,14 @@ protected:
         for (int j = 0; j < max_culomn_number; ++j)
           this->data[i][j] = data_type(0);
     }
-    virtual ~c_array() {}
   };
 
 public:
   compressed_matrix() = default;
   virtual ~compressed_matrix() {}
 
-  inline bool empty() { return (this->size ? false : true); }
-  inline int get_size() { return this->size; }
+  bool empty() { return !this->size; }
+  int get_size() { return this->size; }
 
   /** @brief Convert compressed matrix to C-Style array.
    *  @return arr <c_array> converted C-Style array

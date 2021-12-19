@@ -48,6 +48,11 @@ public:
     return this->data[__i];
   }
 
+  void fill(value_type __v) noexcept {
+    for (auto &_ : *this)
+      _ = __v;
+  }
+
   void resize(size_type __n) {
     __n < __size ? __size = __n : 0;
     auto tmp = new value_type[__n]();
