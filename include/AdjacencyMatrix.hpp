@@ -258,11 +258,10 @@ public:
     for (size_type i{}, k = 0; i < this->get_vertices_number(); ++i) {
       std::cout << vertices[size_t(i)];
       for (size_type j{}; j < this->get_vertices_number(); ++j)
-        std::cout << '\t'
-                  << ((this->list[k].line == int(i) and
-                       this->list[k].culomn == int(j))
-                          ? this->list[k++].data
-                          : (i == j ? 0 : -1));
+        printf("%6d", ((this->list[k].line == int(i) and
+                        this->list[k].culomn == int(j))
+                           ? this->list[k++].data
+                           : (i == j ? 0 : -1)));
       std::cout << std::endl;
     }
   }
