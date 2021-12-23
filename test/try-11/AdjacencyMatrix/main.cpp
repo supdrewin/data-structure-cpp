@@ -15,7 +15,7 @@
 
 #include "AdjacencyMatrix.hpp"
 
-int main() {
+int main(int, char **) {
   adjacency_matrix<6> graph("abcdef");
 
   graph.add_edge(1, 0, 2);
@@ -29,31 +29,39 @@ int main() {
   graph.add_edge(2, 5, 7);
 
   graph.print();
+  std::cout << "\n";
 
   std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
-      "Depth First Search:\t" SGR_RESET_ALL SGR_MAGENTA_FOREGROUND;
+      "Depth First Search:\n" SGR_RESET_ALL SGR_MAGENTA_FOREGROUND;
   graph.depth_first_search();
-
-  std::cout << std::endl;
+  std::cout << "\n";
 
   std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
-      "Breath First Search:\t" SGR_RESET_ALL SGR_MAGENTA_FOREGROUND;
+      "Breath First Search:\n" SGR_RESET_ALL SGR_MAGENTA_FOREGROUND;
   graph.breadth_first_search();
+  std::cout << "\n\n";
 
-  std::cout << std::endl;
+  for (size_t i{}; i < graph.get_vertices_number(); ++i, std::cout << '\n') {
+    graph.dijkstra(i);
 
-  graph.dijkstra(0);
-  std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
-      "Dist[]:" SGR_RESET_ALL SGR_MAGENTA_FOREGROUND;
-  for (size_t i{}; i < graph.get_vertices_number(); ++i)
-    std::cout << '\t' << graph.distance[i];
+    std::cout << SGR_BOLD SGR_GREEN_FOREGROUND "Path[" << i
+              << "]: " SGR_RESET_ALL SGR_MAGENTA_FOREGROUND;
+    for (size_t j{}; j < graph.get_vertices_number(); ++j)
+      std::cout << graph.path[j] << '\t';
+    std::cout << '\n';
 
-  std::cout << std::endl;
-
-  std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
-      "Path[]:" SGR_RESET_ALL SGR_MAGENTA_FOREGROUND;
-  for (size_t i{}; i < graph.get_vertices_number(); ++i)
-    std::cout << '\t' << graph.path[i];
+    size_t j{};
+    for (auto _ : graph) {
+      std::cout << SGR_BOLD SGR_GREEN_FOREGROUND "Distance from " << graph[i]
+                << " to " << _ << " is ";
+      if (graph.distance[j] == -1)
+        std::cout << SGR_RED_FOREGROUND "unavailable!!";
+      else
+        std::cout << SGR_RESET_ALL SGR_MAGENTA_FOREGROUND << graph.distance[j];
+      std::cout << '\n';
+      ++j;
+    }
+  }
 
   return 0;
 }

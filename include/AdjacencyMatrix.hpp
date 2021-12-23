@@ -16,8 +16,6 @@
 #ifndef __adjacency_matrix_hpp
 #define __adjacency_matrix_hpp 1
 
-#include <iomanip>
-
 #include "CompressedMatrix.hpp"
 #include "array.hpp"
 #include "queue.hpp"
@@ -51,7 +49,7 @@ public:
 
   void print_vertices_number() {
     std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
-        "The number of vertices:\t" SGR_RESET_ALL SGR_MAGENTA_FOREGROUND
+        "The number of vertices: " SGR_RESET_ALL SGR_MAGENTA_FOREGROUND
               << this->vertices_number << std::endl;
   }
   //----------------- vertices number ----------------------------//
@@ -62,7 +60,7 @@ public:
 
   void print_edges_number() {
     std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
-        "The number of edges:\t" SGR_RESET_ALL SGR_MAGENTA_FOREGROUND
+        "The number of edges: " SGR_RESET_ALL SGR_MAGENTA_FOREGROUND
               << this->edges_number() << std::endl;
   }
   //-------------------- edges number ----------------------------//
@@ -91,6 +89,11 @@ public:
   void delete_vertex(char vertex) {
     this->delete_vertex(this->vertices.find_first_of(vertex));
   }
+
+  auto begin() { return this->vertices.begin(); }
+  auto end() { return this->vertices.end(); }
+
+  auto &operator[](size_type __i) { return this->vertices[__i]; }
   //-------------------------- vertex ----------------------------//
 
 public:
@@ -99,7 +102,7 @@ public:
     return this->add(head, end, weight);
   }
 
-  // TODO: change all to size_t
+  // TODO: change all size to size_t
   bool delete_edge(size_type index) { return this->erase(int(index)); }
 
   bool delete_edge(int head, int end) {
@@ -255,8 +258,8 @@ public:
     for (size_type i{}, k = 0; i < this->get_vertices_number(); ++i) {
       std::cout << vertices[size_t(i)];
       for (size_type j{}; j < this->get_vertices_number(); ++j)
-        std::cout << std::setw(6)
-                  << ((this->list[k].line == int(i) and //
+        std::cout << '\t'
+                  << ((this->list[k].line == int(i) and
                        this->list[k].culomn == int(j))
                           ? this->list[k++].data
                           : (i == j ? 0 : -1));
@@ -265,9 +268,9 @@ public:
   }
 
   void print() {
-    this->print_matrix();
     this->print_vertices_number();
     this->print_edges_number();
+    this->print_matrix();
   }
   //--------------------------- print ----------------------------//
 };
