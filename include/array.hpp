@@ -20,7 +20,7 @@ namespace via {
 template <class value_type> class array {
 public:
   using container_type = array;
-  using size_type = unsigned long;
+  using size_type = unsigned long long;
   using reference = value_type &;
 
 protected:

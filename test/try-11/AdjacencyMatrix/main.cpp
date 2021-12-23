@@ -14,6 +14,7 @@
  */
 
 #include "AdjacencyMatrix.hpp"
+#include "stack.hpp"
 
 int main(int, char **) {
   adjacency_matrix<6> graph("abcdef");
@@ -50,16 +51,42 @@ int main(int, char **) {
       std::cout << graph.path[j] << '\t';
     std::cout << '\n';
 
-    size_t j{};
-    for (auto _ : graph) {
-      std::cout << SGR_BOLD SGR_GREEN_FOREGROUND "Distance from " << graph[i]
-                << " to " << _ << " is ";
+    for (size_t j{}; auto _ : graph) {
+      std::cout << SGR_BOLD SGR_GREEN_FOREGROUND "Distance from `" << graph[i]
+                << "' to `" << _ << "' is ";
       if (graph.distance[j] == -1)
-        std::cout << SGR_RED_FOREGROUND "unavailable!!";
+        std::cout << SGR_BLINK_ON SGR_RED_FOREGROUND
+            "unavailable!!" SGR_RESET_ALL SGR_MAGENTA_FOREGROUND;
       else
         std::cout << SGR_RESET_ALL SGR_MAGENTA_FOREGROUND << graph.distance[j];
       std::cout << '\n';
       ++j;
+    }
+
+    std::cout
+        << SGR_BOLD SGR_GREEN_FOREGROUND "\nThe min path from `" << graph[i]
+        << "' to others are as follow:\n" SGR_RESET_ALL SGR_MAGENTA_FOREGROUND;
+
+    for (size_t j{}; j < graph.get_vertices_number(); ++j) {
+      via::stack<char> v;
+      i == j ? ++j : 0;
+
+      for (int k{static_cast<int>(j)};;
+           k = graph.path[static_cast<size_t>(k)]) {
+        v.push(graph[static_cast<size_t>(k)]);
+        if (graph.path[static_cast<size_t>(k)] == -1)
+          break;
+      }
+
+      if (v.top() == graph[i]) {
+        std::cout << v.top();
+        v.pop();
+        while (not v.empty()) {
+          std::cout << " -> " << v.top();
+          v.pop();
+        }
+        std::cout << '\n';
+      }
     }
   }
 

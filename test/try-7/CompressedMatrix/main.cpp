@@ -20,8 +20,8 @@
 #define N 4
 
 int main() {
-  static std::uniform_int_distribution<int> n_1(0, N - 1);
-  static std::uniform_int_distribution<int> n_2_1(0, N * 2 - 1);
+  static std::uniform_int_distribution<size_t> n_1(0, N - 1);
+  static std::uniform_int_distribution<size_t> n_2_1(0, N * 2 - 1);
   static std::uniform_int_distribution<int> n_n(0, N * N);
 
   compressed_matrix<int, N, N * 2> m;

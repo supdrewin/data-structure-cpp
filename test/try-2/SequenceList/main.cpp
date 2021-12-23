@@ -27,16 +27,16 @@ struct patient : people {
 // Define a sequence list of patients with 100 maxsize.
 class sequencelist : public sequence_list<patient, 100> {
 public:
-  sequencelist(int n) { this->init(n); }
+  sequencelist(size_t n) { this->init(n); }
   ~sequencelist() {}
 
-  void init(int n) {
+  void init(size_t n) {
     std::cout << RIS;
 
     n > 0 ? void(0) : std::exit(EXIT_FAILURE);
-    auto tmp = new patient[static_cast<unsigned>(n)];
+    auto tmp = new patient[n];
 
-    for (int i = 0; i < n; i++) {
+    for (size_t i{}; i < n; i++) {
       std::cout << "------Please insert the " << i + 1
                 << "th patient's information" << std::endl;
 
@@ -68,8 +68,8 @@ public:
     delete[] tmp;
   }
 
-  int get(int i) {
-    if (i < 0 or i > this->size - 1) {
+  bool get(size_t i) {
+    if (i > this->size - 1) {
       std::cerr << __PRETTY_FUNCTION__        //
                 << ": Invailed argument `i'!" //
                 << std::endl;
@@ -90,9 +90,9 @@ public:
                 << ": Nothing to do!"  //
                 << std::endl;
     else
-      for (int i = 0; i < this->size; i++)
+      for (size_t i{}; i < this->size; ++i)
         if (name == this->list[i].name)
-          return i;
+          return int(i);
     return -1;
   }
 };
@@ -106,7 +106,7 @@ int main() {
   std::cout << "number" << '\t' << "name" << '\t' << "age" << '\t' //
             << "sex" << '\t' << "symptom" << std::endl;
 
-  for (int i = 0; i < mylist.get_size(); i++)
+  for (size_t i{}; i < mylist.get_size(); ++i)
     mylist.get(i);
 
   std::cout << "*************** Following are My Homework ***************"
@@ -114,10 +114,13 @@ int main() {
 
   std::cout << "Please insert the name of patient you want to find: ";
 
-  std::string find;
-  std::cin >> find;
+  std::string to_find;
+  std::cin >> to_find;
 
-  mylist.get(mylist.find(find));
+  auto index{mylist.find(to_find)};
+
+  if (index != -1)
+    mylist.get(size_t(index));
 
   return 0;
 }

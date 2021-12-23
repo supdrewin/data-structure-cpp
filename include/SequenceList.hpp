@@ -18,26 +18,25 @@
 
 #include "utility.hpp"
 
-template <typename elem_type, int max_size> //
+template <typename elem_type, size_t max_size> //
 class sequence_list {
 protected:
-  elem_type list[unsigned(max_size)]; // store list member to here
-  int size{0};                        // the size of sequence list,
-                                      // default to 0(empty)
-
+  elem_type list[max_size]; // store list member to here
+  size_t size;              // the size of sequence list,
+                            // default to 0(empty)
 public:
-  sequence_list() = default;
-  virtual ~sequence_list() {}
+  sequence_list() : list(), size() {}
 
-  inline int get_size() { return this->size; }
+  size_t get_size() { return this->size; }
+  bool empty() { return !this->size; }
 
-  bool insert(int index, elem_type push) {
+  bool insert(size_t index, elem_type push) {
     if (this->size >= max_size)
       std::cerr << __PRETTY_FUNCTION__ << ": Too full to insert!" << std::endl;
-    else if (index < 0 or index > this->size)
+    else if (index > this->size)
       std::cerr << __PRETTY_FUNCTION__ << ": Invailed argument!" << std::endl;
     else {
-      for (int i = this->size; i > index; --i)
+      for (auto i{this->size}; i > index; --i)
         this->list[i] = this->list[i - 1];
       this->list[index] = push;
       this->size++;
@@ -46,15 +45,15 @@ public:
     return false;
   }
 
-  bool erase(int index, elem_type *pop = nullptr) {
-    if (this->size <= 0)
+  bool erase(size_t index, elem_type *pop = nullptr) {
+    if (this->size == 0)
       std::cerr << __PRETTY_FUNCTION__ << ": Nothing to do!" << std::endl;
-    else if (index < 0 or index > this->size - 1)
+    else if (index > this->size - 1)
       std::cerr << __PRETTY_FUNCTION__ << ": Invailed argument!" << std::endl;
     else {
       if (pop != nullptr)
         *pop = this->list[index];
-      for (int i = index; i <= this->size - 1; ++i)
+      for (auto i{index}; i <= this->size - 1; ++i)
         this->list[i] = this->list[i + 1];
       this->size--;
       return true;
