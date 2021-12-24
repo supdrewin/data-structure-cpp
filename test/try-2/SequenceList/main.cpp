@@ -69,7 +69,7 @@ public:
   }
 
   bool get(size_t i) {
-    if (i > this->size - 1) {
+    if (i > this->size() - 1) {
       std::cerr << __PRETTY_FUNCTION__        //
                 << ": Invailed argument `i'!" //
                 << std::endl;
@@ -85,12 +85,12 @@ public:
   }
 
   int find(std::string name) {
-    if (this->size <= 0)
+    if (this->size() <= 0)
       std::cerr << __PRETTY_FUNCTION__ //
                 << ": Nothing to do!"  //
                 << std::endl;
     else
-      for (size_t i{}; i < this->size; ++i)
+      for (size_t i{}; i < this->size(); ++i)
         if (name == this->list[i].name)
           return int(i);
     return -1;
@@ -106,7 +106,7 @@ int main() {
   std::cout << "number" << '\t' << "name" << '\t' << "age" << '\t' //
             << "sex" << '\t' << "symptom" << std::endl;
 
-  for (size_t i{}; i < mylist.get_size(); ++i)
+  for (size_t i{}; i < mylist.size(); ++i)
     mylist.get(i);
 
   std::cout << "*************** Following are My Homework ***************"

@@ -45,7 +45,7 @@ public:
    */
   c_array c_arr() {
     c_array arr;
-    for (size_t i{}; i < this->size; ++i)
+    for (size_t i{}; i < this->size(); ++i)
       arr.data[this->list[i].line][this->list[i].culomn] = //
           this->list[i].data;
     return arr;
@@ -66,7 +66,7 @@ public:
     }
 
     // Search first position ge (line, culomn) from list.
-    for (size_t i{}; i < this->size; ++i)
+    for (size_t i{}; i < this->size(); ++i)
       if (line < this->list[i].line or
           (line == this->list[i].line and culomn <= this->list[i].culomn)) {
         // If the position has recorded, override it.
@@ -84,7 +84,7 @@ public:
       }
 
     // If not positions ge (line, culomn), add last.
-    this->insert(this->size, //
+    this->insert(this->size(), //
                  compressed_matrix_base_data<data_type>{
                      line,   //
                      culomn, //

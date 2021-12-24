@@ -50,7 +50,7 @@ public:
   //----------------- vertices number ----------------------------//
 
   //-------------------- edges number ----------------------------//
-  size_t edges_number() { return size_t(this->get_size()); }
+  size_t edges_number() { return this->size(); }
 
   void print_edges_number() {
     std::cout << SGR_BOLD SGR_GREEN_FOREGROUND
@@ -242,7 +242,7 @@ public:
         "Now print this adjacency matrix:\n" //
         SGR_RESET_ALL SGR_MAGENTA_FOREGROUND;
     for (size_t i{}, k = 0; i < this->get_vertices_number(); ++i) {
-      std::cout << vertices[size_t(i)];
+      std::cout << vertices[i];
       for (size_t j{}; j < this->get_vertices_number(); ++j)
         printf("%6d", ((this->list[k].line == i and this->list[k].culomn == j)
                            ? this->list[k++].data

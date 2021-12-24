@@ -22,40 +22,40 @@ template <typename elem_type, size_t max_size> //
 class sequence_list {
 protected:
   elem_type list[max_size]; // store list member to here
-  size_t size;              // the size of sequence list,
+  size_t __size;            // the size of sequence list,
                             // default to 0(empty)
 public:
-  sequence_list() : list(), size() {}
+  sequence_list() : list(), __size() {}
 
-  size_t get_size() { return this->size; }
-  bool empty() { return !this->size; }
+  size_t size() { return this->__size; }
+  bool empty() { return !this->__size; }
 
   bool insert(size_t index, elem_type push) {
-    if (this->size >= max_size)
+    if (this->__size >= max_size)
       std::cerr << __PRETTY_FUNCTION__ << ": Too full to insert!" << std::endl;
-    else if (index > this->size)
+    else if (index > this->__size)
       std::cerr << __PRETTY_FUNCTION__ << ": Invailed argument!" << std::endl;
     else {
-      for (auto i{this->size}; i > index; --i)
+      for (auto i{this->__size}; i > index; --i)
         this->list[i] = this->list[i - 1];
       this->list[index] = push;
-      this->size++;
+      ++this->__size;
       return true;
     }
     return false;
   }
 
   bool erase(size_t index, elem_type *pop = nullptr) {
-    if (this->size == 0)
+    if (this->__size == 0)
       std::cerr << __PRETTY_FUNCTION__ << ": Nothing to do!" << std::endl;
-    else if (index > this->size - 1)
+    else if (index > this->__size - 1)
       std::cerr << __PRETTY_FUNCTION__ << ": Invailed argument!" << std::endl;
     else {
       if (pop != nullptr)
         *pop = this->list[index];
-      for (auto i{index}; i <= this->size - 1; ++i)
+      for (auto i{index}; i <= this->__size - 1; ++i)
         this->list[i] = this->list[i + 1];
-      this->size--;
+      --this->__size;
       return true;
     }
     return false;
