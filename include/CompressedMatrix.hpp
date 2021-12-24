@@ -168,6 +168,8 @@ public:
 
     return tmp;
   }
+
+  auto &operator[](size_t i) { return this->list[i]; }
 };
 
 #endif // !__compressed_matrix_hpp
