@@ -16,34 +16,4 @@
 #ifndef __binary_tree_hpp
 #define __binary_tree_hpp 1
 
-template <typename data_type> //
-class binary_tree {
-protected:
-  struct node {
-    data_type data;
-    node *left, *right;
-    node() : left(nullptr), right(nullptr) {}
-    node(data_type d, node *l = nullptr, node *r = nullptr)
-        : data(d), left(l), right(r) {}
-    ~node() {}
-  } * root;
-
-public:
-  binary_tree() : root(nullptr) { this->create(); };
-  ~binary_tree() { this->destroy(); }
-
-  inline bool empty() { return (this->root == nullptr ? true : false); }
-
-  // TODO:...
-
-  int create() {
-    // create(this->root);
-    return false;
-  }
-  // int create(node *n) {}
-
-  int destroy() { return (this->root == nullptr ? 0 : destroy(this->root)); }
-  int destroy(node *n) { return (n == nullptr ? 0 : destroy(n)); }
-};
-
 #endif // !__binary_tree_hpp
