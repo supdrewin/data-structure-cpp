@@ -13,10 +13,39 @@
  * with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include <cstdio>
+
 #include "BinaryTree.hpp"
 
 int main() {
-  // TODO:...
+  binary_tree<char> bt('A');
+  bt.root->lchild = new binary_tree<char>::node('B');
+  bt.root->rchild = new binary_tree<char>::node('F');
+  bt.root->lchild->lchild = new binary_tree<char>::node('C');
+  bt.root->lchild->lchild->lchild = new binary_tree<char>::node('D');
+  bt.root->lchild->lchild->rchild = new binary_tree<char>::node('E');
+  bt.root->rchild->lchild = new binary_tree<char>::node('G');
+
+  auto pre{bt.preorder_traversal()}, in{bt.inorder_traversal()},
+      post{bt.postorder_traversal()}, level{bt.levelorder_traversal()};
+
+  printf("The number of nodes: %d", static_cast<int>(level.size()));
+
+  printf("\nPreorder Traversal:");
+  for (auto _ : pre)
+    printf("\t%c", _);
+
+  printf("\nInorder Traversal:");
+  for (auto _ : in)
+    printf("\t%c", _);
+
+  printf("\nPostorder Traversal:");
+  for (auto _ : post)
+    printf("\t%c", _);
+
+  printf("\nLevelorder Traversal:");
+  for (auto _ : level)
+    printf("\t%c", _);
 
   return 0;
 }
